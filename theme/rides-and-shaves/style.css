@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -16,6 +16,9 @@ Text Domain: rides-and-shaves
 :root {
 	--ras-line: color-mix(in srgb, var(--wp--preset--color--gold) 38%, transparent);
 	--ras-line-soft: color-mix(in srgb, var(--wp--preset--color--gold) 18%, transparent);
+	/* Altura do cabecalho, medida no site. Se o logotipo ou o padding do
+	   cabecalho mudarem, e este valor que garante a folga no banner. */
+	--ras-header: 134px;
 }
 
 /* --- Titulo de seccao com filete a estender para a direita ---------------- */
@@ -593,16 +596,66 @@ main.wp-block-group > * {
 	position: relative;
 }
 
-/* Medido no site: cabecalho 134px, titulo a 80px, folga de 50px. A altura
-   minima do banner e o avanco do texto sao explicitos porque o alinhamento ao
-   centro sozinho falha — quanto maior o titulo, mais alto o bloco sobe. Foi o
-   que aconteceu ao aumentar a letra: a folga passou a -12px. */
-.home .ras-hero img {
+/* A foto preenche o banner todo e o texto assenta por cima de um gradiente que
+   vai de denso a esquerda a transparente a direita. Antes a coluna de texto era
+   um bloco verde solido a ocupar 56% da largura e a foto so via 44%.
+
+   A imagem sai do fluxo, por isso a altura do banner passa a ser dada aqui.
+   Medido no site: cabecalho 134px, titulo a 80px. O avanco do texto e explicito
+   porque o alinhamento ao centro sozinho falha — quanto maior o titulo, mais
+   alto o bloco sobe, e a folga para o menu chegou a ficar negativa. */
+.home .ras-banner {
+	position: relative;
 	min-height: clamp(640px, 78vh, 740px);
 }
 
+.home .ras-banner > .wp-block-columns {
+	min-height: inherit;
+	/* Nao centrar a coluna: o avanco do texto passa a mandar sozinho na folga
+	   para o menu, sem depender de o texto ser mais alto ou mais baixo que o
+	   banner. Era esse limiar que fazia a folga saltar de 6px para 70px entre
+	   dois valores seguidos de padding. */
+	align-items: stretch;
+}
+
+.home .ras-hero {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	flex: none;
+	width: 100%;
+	max-width: none;
+	padding: 0;
+}
+
+.home .ras-hero figure,
+.home .ras-hero img {
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	object-fit: cover;
+}
+
+/* Denso a esquerda, zero a direita: o texto le-se e a fotografia aparece. */
+.home .ras-hero::after {
+	background: linear-gradient(
+		90deg,
+		var(--wp--preset--color--green-950) 0%,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 88%, transparent) 32%,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 40%, transparent) 62%,
+		transparent 88%
+	);
+}
+
 .home .ras-hero-texto {
-	padding-top: calc(var(--wp--preset--spacing--60) + 7rem);
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top: calc(var(--ras-header) + var(--wp--preset--spacing--40));
+	padding-bottom: var(--wp--preset--spacing--50);
+	padding-inline: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
 }
 
 /* Em mobile as colunas empilham e o menu ficaria por cima do titulo sem foto
@@ -620,8 +673,27 @@ main.wp-block-group > * {
 		background-color: var(--wp--preset--color--green-950);
 	}
 
+	.home .ras-banner {
+		min-height: 0;
+	}
+
+	.home .ras-hero {
+		position: static;
+		width: auto;
+		flex: 1 1 0;
+	}
+
 	.home .ras-hero img {
 		min-height: 360px;
+		height: auto;
+	}
+
+	.home .ras-hero::after {
+		background: linear-gradient(
+			to bottom,
+			transparent 40%,
+			color-mix(in srgb, var(--wp--preset--color--green-950) 70%, transparent) 100%
+		);
 	}
 
 	.home .ras-hero-texto {
