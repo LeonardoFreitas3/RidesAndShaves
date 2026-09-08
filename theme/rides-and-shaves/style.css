@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.1.1
+Version: 1.2.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -169,7 +169,11 @@ Text Domain: rides-and-shaves
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(90deg, var(--wp--preset--color--green-950) 0%, transparent 45%);
+	background: linear-gradient(
+		90deg,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 80%, transparent) 0%,
+		transparent 22%
+	);
 	pointer-events: none;
 }
 
@@ -589,15 +593,16 @@ main.wp-block-group > * {
 	position: relative;
 }
 
-/* Medido no site: o cabecalho fica com 134px. A altura minima do banner e o
-   avanco do texto garantem que o titulo passa por baixo dele com folga, em vez
-   de depender do alinhamento ao centro — que falhava em ecras baixos. */
+/* Medido no site: cabecalho 134px, titulo a 80px, folga de 50px. A altura
+   minima do banner e o avanco do texto sao explicitos porque o alinhamento ao
+   centro sozinho falha — quanto maior o titulo, mais alto o bloco sobe. Foi o
+   que aconteceu ao aumentar a letra: a folga passou a -12px. */
 .home .ras-hero img {
-	min-height: clamp(600px, 74vh, 700px);
+	min-height: clamp(640px, 78vh, 740px);
 }
 
 .home .ras-hero-texto {
-	padding-top: calc(var(--wp--preset--spacing--60) + 5rem);
+	padding-top: calc(var(--wp--preset--spacing--60) + 7rem);
 }
 
 /* Em mobile as colunas empilham e o menu ficaria por cima do titulo sem foto

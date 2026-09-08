@@ -103,7 +103,7 @@
 				},
 				{
 					"slug": "xx-large",
-					"size": "clamp(2.2rem, 1.4rem + 3vw, 3.4rem)",
+					"size": "clamp(2.6rem, 1.4rem + 5vw, 5rem)",
 					"name": "Hero"
 				}
 			]
