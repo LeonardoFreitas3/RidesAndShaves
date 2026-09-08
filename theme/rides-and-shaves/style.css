@@ -1,0 +1,583 @@
+/*
+Theme Name: Rides and Shaves
+Theme URI: https://ridesandshaves.pt
+Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
+Author: Rides and Shaves
+Template: twentytwentyfive
+Version: 0.8.0
+Requires at least: 6.6
+Tested up to: 6.8
+Requires PHP: 7.4
+Text Domain: rides-and-shaves
+*/
+
+/* ponytail: só o que o theme.json nao cobre. Cores, espacamentos e tipografia vivem la. */
+
+:root {
+	--ras-line: color-mix(in srgb, var(--wp--preset--color--gold) 38%, transparent);
+	--ras-line-soft: color-mix(in srgb, var(--wp--preset--color--gold) 18%, transparent);
+}
+
+/* --- Titulo de seccao com filete a estender para a direita ---------------- */
+/* "OS NOSSOS SERVIÇOS ————————————" do mockup. */
+.ras-rule {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.ras-rule::after {
+	content: "";
+	flex: 1 1 auto;
+	height: 1px;
+	background: var(--ras-line);
+}
+
+/* --- Ornamento "— SINCE 1995 —" ------------------------------------------ */
+.ras-ornament {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.ras-ornament::before,
+.ras-ornament::after {
+	content: "";
+	width: 2.5rem;
+	height: 1px;
+	background: var(--wp--preset--color--gold);
+}
+
+.ras-ornament::after {
+	flex: 0 0 2.5rem;
+}
+
+/* --- Grelha de servicos: uma caixa, divisorias internas ------------------- */
+/* ponytail: as divisorias sao um border-left no irmao, nao 6 elementos <hr>. */
+.ras-services {
+	border: 1px solid var(--ras-line);
+}
+
+.ras-services > .wp-block-columns {
+	margin-block: 0;
+	gap: 0;
+	/* Colunas a esticar para os botoes assentarem na mesma linha. Explicito
+	   para nao depender do default do tema pai. */
+	align-items: stretch;
+}
+
+/* Coluna em flex para os botoes assentarem todos na mesma linha de base,
+   independentemente do comprimento da descricao. */
+.ras-service {
+	display: flex;
+	flex-direction: column;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--20);
+	text-align: center;
+}
+
+.ras-service h3 {
+	min-height: 2.3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ras-service .wp-block-buttons {
+	margin-top: auto;
+	justify-content: center;
+}
+
+.ras-service + .ras-service {
+	border-left: 1px solid var(--ras-line-soft);
+}
+
+/* Empilhado em mobile a divisoria tem de virar horizontal, senao fica solta. */
+@media (max-width: 781px) {
+	.ras-service + .ras-service {
+		border-left: 0;
+		border-top: 1px solid var(--ras-line-soft);
+	}
+}
+
+.ras-service img {
+	width: 44px;
+	height: 44px;
+	margin-inline: auto;
+}
+
+/* Botao pequeno dentro de cada servico. */
+.ras-service .wp-block-button__link {
+	padding: 0.6em 1.4em;
+	font-size: 0.75rem;
+}
+
+/* --- Preco --------------------------------------------------------------- */
+.ras-price {
+	color: var(--wp--preset--color--gold);
+	font-variant-numeric: tabular-nums;
+}
+
+/* --- Cartao de loja / review: moldura fina em vez de sombra --------------- */
+.ras-card {
+	border: 1px solid var(--ras-line-soft);
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--20);
+}
+
+/* --- Cartao de loja com foto: morada por cima da imagem ------------------- */
+.ras-place {
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--ras-line-soft);
+}
+
+.ras-place figure {
+	margin: 0;
+}
+
+.ras-place img {
+	display: block;
+	width: 100%;
+	height: 240px;
+	object-fit: cover;
+}
+
+.ras-place .ras-place-body {
+	padding: var(--wp--preset--spacing--30);
+}
+
+/* --- Hero: imagem a sangrar do lado direito ------------------------------- */
+/* align-self:stretch vence o alinhamento ao centro da coluna, senao a foto
+   fica a flutuar com vazio em cima e em baixo. */
+.ras-hero {
+	position: relative;
+	align-self: stretch;
+}
+
+.ras-hero figure,
+.ras-hero img {
+	height: 100%;
+}
+
+.ras-hero img {
+	width: 100%;
+	min-height: 320px;
+	object-fit: cover;
+}
+
+/* Vinheta para o texto respirar quando a foto for clara. */
+.ras-hero::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, var(--wp--preset--color--green-950) 0%, transparent 45%);
+	pointer-events: none;
+}
+
+/* --- Listas de links do rodape: sem bolinhas ----------------------------- */
+.ras-links {
+	list-style: none;
+	padding-left: 0;
+}
+
+/* --- Produtos: a grelha do shortcode do WooCommerce ---------------------- */
+.woocommerce ul.products li.product {
+	border: 1px solid var(--ras-line-soft);
+	padding: var(--wp--preset--spacing--20);
+	text-align: center;
+}
+
+.woocommerce ul.products li.product .price {
+	color: var(--wp--preset--color--gold);
+}
+
+/* --- Foco visivel — o tema pai apaga-o em fundos escuros ------------------ */
+:where(a, button, input, .wp-element-button):focus-visible {
+	outline: 2px solid var(--wp--preset--color--gold);
+	outline-offset: 2px;
+}
+
+/* --- Monograma dourado nas reviews --------------------------------------- */
+/* ponytail: substitui as fotografias de rosto do mockup. Os nomes sao de
+   pessoas reais; um retrato inventado ao lado de um nome real nao passa. */
+.ras-monogram {
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--green-900);
+	font-weight: 700;
+	font-size: 0.85rem;
+}
+
+.ras-autor {
+	align-items: center;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.ras-autor p {
+	margin: 0;
+}
+
+/* --- Cartoes do Journal --------------------------------------------------- */
+.ras-artigo {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--ras-line-soft);
+	overflow: hidden;
+}
+
+.ras-artigo figure {
+	margin: 0;
+	line-height: 0;
+}
+
+.ras-artigo img {
+	display: block;
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+
+.ras-artigo-body {
+	padding: var(--wp--preset--spacing--20);
+}
+
+.ras-artigo-body p {
+	margin-bottom: 0;
+}
+
+/* --- Montra da homepage --------------------------------------------------- */
+.ras-montra {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--wp--preset--spacing--20);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ras-produto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	border: 1px solid var(--ras-line-soft);
+	padding: var(--wp--preset--spacing--20);
+	text-align: center;
+}
+
+.ras-produto-foto {
+	display: block;
+	width: 100%;
+}
+
+.ras-produto img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.ras-produto-nome {
+	color: var(--wp--preset--color--cream);
+	text-decoration: none;
+	font-size: 0.875rem;
+}
+
+.ras-produto-nome:hover {
+	color: var(--wp--preset--color--gold);
+}
+
+.ras-produto .ras-price {
+	font-size: 0.875rem;
+}
+
+/* Botao encostado a base para os quatro cartoes alinharem. */
+.ras-produto .wp-element-button {
+	margin-top: auto;
+	font-size: 0.75rem;
+	padding: 0.7em 1.3em;
+	text-decoration: none;
+}
+
+@media (max-width: 781px) {
+	.ras-montra {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* --- Icones nos botoes ---------------------------------------------------- */
+/* ponytail: mask em vez de <img>. O icone herda a cor do texto do botao, por
+   isso funciona igual no botao dourado e no delineado, sem dois ficheiros. */
+[class*="is-icon-"] > .wp-block-button__link::before {
+	content: "";
+	display: inline-block;
+	width: 1.1em;
+	height: 1.1em;
+	margin-right: 0.6em;
+	vertical-align: -0.2em;
+	background-color: currentColor;
+	-webkit-mask: center / contain no-repeat;
+	mask: center / contain no-repeat;
+}
+
+.is-icon-cal > .wp-block-button__link::before {
+	-webkit-mask-image: url("assets/icons/calendar.svg");
+	mask-image: url("assets/icons/calendar.svg");
+}
+
+.is-icon-cart > .wp-block-button__link::before {
+	-webkit-mask-image: url("assets/icons/cart.svg");
+	mask-image: url("assets/icons/cart.svg");
+}
+
+.is-icon-pin > .wp-block-button__link::before {
+	-webkit-mask-image: url("assets/icons/pin.svg");
+	mask-image: url("assets/icons/pin.svg");
+}
+
+/* --- Rodape -------------------------------------------------------------- */
+.ras-col-title {
+	letter-spacing: 0.12em;
+	margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.ras-hr {
+	opacity: 0.25;
+	margin-block: var(--wp--preset--spacing--30);
+}
+
+.ras-links li {
+	margin-bottom: 0.45rem;
+	font-size: 0.875rem;
+}
+
+.ras-contactos li {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+}
+
+/* Icones dos contactos: mesmo truque de mask dos botoes. */
+.ras-ico {
+	flex: 0 0 auto;
+	width: 1em;
+	height: 1em;
+	background-color: var(--wp--preset--color--gold);
+	-webkit-mask: center / contain no-repeat;
+	mask: center / contain no-repeat;
+}
+
+.ras-ico-pin {
+	-webkit-mask-image: url("assets/icons/pin.svg");
+	mask-image: url("assets/icons/pin.svg");
+}
+
+.ras-ico-tel {
+	-webkit-mask-image: url("assets/icons/tel.svg");
+	mask-image: url("assets/icons/tel.svg");
+}
+
+/* Rotulo so para leitores de ecra. O tema pai define isto, mas se o label ficar
+   como item da grelha desalinha o formulario todo — por isso e definido aqui. */
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* --- Newsletter ----------------------------------------------------------- */
+/* ponytail: o form nao submete para lado nenhum ate ligarem o plugin de
+   newsletter. O action="#" e o sitio onde entra o endpoint deles. */
+.ras-newsletter {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 0;
+}
+
+.ras-newsletter input[type="email"] {
+	padding: 0.7em 0.9em;
+	border: 1px solid var(--ras-line);
+	border-right: 0;
+	background: transparent;
+	color: var(--wp--preset--color--cream);
+	font-size: 0.875rem;
+}
+
+.ras-newsletter input[type="email"]::placeholder {
+	color: color-mix(in srgb, var(--wp--preset--color--cream) 55%, transparent);
+}
+
+.ras-newsletter button {
+	padding: 0 1em;
+	border: 0;
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--green-900);
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+/* Consentimento RGPD: nao esta no mockup, mas o campo de email sozinho
+   nao chega para recolher emails em Portugal. */
+.ras-consent {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	margin-top: 0.6rem;
+	font-size: 0.75rem;
+	line-height: 1.4;
+}
+
+.ras-legal {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 1rem;
+	font-size: 0.8125rem;
+}
+
+.ras-legal p {
+	margin: 0;
+}
+
+/* --- Encaixe das seccoes -------------------------------------------------- */
+/* O WordPress punha 24px de margem entre o cabecalho e o main, e via-se uma
+   faixa do fundo do body entre o header e o hero. As seccoes tem fundo proprio
+   e encostam umas as outras, como no mockup. */
+main.wp-block-group {
+	margin-block-start: 0;
+}
+
+main.wp-block-group > * {
+	margin-block: 0;
+}
+
+/* A grelha de servicos estava presa a largura de conteudo (820px) dentro de uma
+   caixa de 1280, o que deixava um vazio grande dos dois lados dentro da moldura. */
+.ras-services > .wp-block-columns {
+	max-width: none;
+	margin-inline: 0;
+}
+
+/* Icone de conta que o WooCommerce injecta no cabecalho. Nao esta no mockup.
+   ponytail: esconder e uma linha; tirar o bloco exigia mexer no template part
+   guardado na base de dados, que o cliente perde ao editar no Site Editor. */
+.wp-block-woocommerce-customer-account {
+	display: none;
+}
+
+/* --- Cor das letras: dois acertos face ao mockup -------------------------- */
+/* 1. Pagina ativa no menu a dourado. O WordPress ja poe a classe current-menu-item.
+   A classe no seletor esta repetida de proposito: o core tem
+   .wp-block-navigation-item__content.wp-block-navigation-item__content{color:inherit}
+   com especificidade (0,3,0), e sem a repetir esta regra perdia. */
+.wp-block-navigation .current-menu-item > a.wp-block-navigation-item__content,
+.wp-block-navigation .current-menu-item > a.wp-block-navigation-item__content:visited,
+.wp-block-navigation .current_page_item > a.wp-block-navigation-item__content {
+	color: var(--wp--preset--color--gold);
+}
+
+/* 2. Links do rodape em cream e sem sublinhado. O theme.json poe todos os links
+   a dourado, mas no mockup as colunas do rodape sao cream — o dourado fica so
+   para o que e mesmo destaque. */
+.ras-links a,
+.ras-contactos a,
+.ras-legal a {
+	color: var(--wp--preset--color--cream);
+	text-decoration: none;
+}
+
+.ras-links a:hover,
+.ras-contactos a:hover,
+.ras-legal a:hover,
+.ras-links a:focus-visible,
+.ras-contactos a:focus-visible,
+.ras-legal a:focus-visible {
+	color: var(--wp--preset--color--gold);
+	text-decoration: underline;
+}
+
+/* --- Morada com pin, como no mockup --------------------------------------- */
+.ras-morada {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	font-size: 0.875rem;
+}
+
+.ras-morada .ras-ico {
+	margin-top: 0.2em;
+}
+
+/* --- Botoes do WooCommerce na marca --------------------------------------- */
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt {
+	display: inline-block;
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--green-900);
+	border: 0;
+	border-radius: 2px;
+	padding: 0.75em 1.4em;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover {
+	background: var(--wp--preset--color--cream);
+	color: var(--wp--preset--color--green-900);
+}
+
+/* Mensagens do Woo (carrinho, avisos) legiveis no fundo escuro. */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+	border-top-color: var(--wp--preset--color--gold);
+	background: color-mix(in srgb, var(--wp--preset--color--green-950) 70%, transparent);
+	color: var(--wp--preset--color--cream);
+}
+
+/* --- Catalogo da loja ----------------------------------------------------- */
+.ras-montra-catalogo {
+	margin-top: var(--wp--preset--spacing--30);
+}
+
+.ras-paginacao {
+	margin-top: var(--wp--preset--spacing--40);
+	text-align: center;
+}
+
+.ras-paginacao .page-numbers {
+	display: inline-block;
+	padding: 0.4em 0.8em;
+	color: var(--wp--preset--color--cream);
+	text-decoration: none;
+}
+
+.ras-paginacao .page-numbers.current {
+	color: var(--wp--preset--color--gold);
+	border-bottom: 1px solid var(--wp--preset--color--gold);
+}
+
+/* A ordenacao e a contagem do WooCommerce nao entram no meu catalogo. */
+.woocommerce-result-count,
+.woocommerce-ordering {
+	display: none;
+}

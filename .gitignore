@@ -1,0 +1,6 @@
+# Pre-visualizacoes geradas por tools/preview.php
+_preview-*.html
+
+# Ficheiros de sistema
+Thumbs.db
+desktop.ini

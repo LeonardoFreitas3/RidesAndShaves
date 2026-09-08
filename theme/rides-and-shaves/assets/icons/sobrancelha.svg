@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#E8A94E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Sobrancelha a linha">
+  <path d="M14 26C22 16 38 14 50 22"/>
+  <path d="M19 21l-3-7"/>
+  <path d="M27 17l-2-8"/>
+  <path d="M36 16l0-8"/>
+  <path d="M44 19l4-7"/>
+  <path d="M14 44c8-9 24-9 32 0-8 9-24 9-32 0"/>
+  <circle cx="30" cy="44" r="4"/>
+</svg>

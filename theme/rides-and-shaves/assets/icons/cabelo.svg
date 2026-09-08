@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#E8A94E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Tesoura">
+  <circle cx="16" cy="49" r="7"/>
+  <circle cx="48" cy="49" r="7"/>
+  <path d="M21 44 47 10"/>
+  <path d="M43 44 17 10"/>
+  <path d="M32 30 38 38"/>
+</svg>

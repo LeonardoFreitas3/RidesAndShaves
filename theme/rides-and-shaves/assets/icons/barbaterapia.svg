@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#E8A94E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Cadeira de barbeiro">
+  <path d="M16 26h32v12a8 8 0 0 1-8 8H24a8 8 0 0 1-8-8z"/>
+  <path d="M20 26V16a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v10"/>
+  <path d="M32 46v8"/>
+  <path d="M20 58h24"/>
+  <path d="M24 54h16l4 4H20z"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#E8A94E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Corte e barba">
+  <path d="M8 16v10c0 8 4 16 10 16s10-8 10-16V16"/>
+  <path d="M8 22c3 2 6 3 10 3s7-1 10-3"/>
+  <path d="M14 30c1.5 1.5 2.5 2 4 2s2.5-.5 4-2"/>
+  <circle cx="41" cy="50" r="4"/>
+  <circle cx="55" cy="50" r="4"/>
+  <path d="M44 47 55 26"/>
+  <path d="M52 47 41 26"/>
+</svg>

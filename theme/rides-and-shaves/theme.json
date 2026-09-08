@@ -1,0 +1,235 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "820px",
+			"wideSize": "1280px"
+		},
+		"color": {
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"custom": false,
+			"palette": [
+				{
+					"slug": "green-950",
+					"color": "#021A16",
+					"name": "Verde quase preto"
+				},
+				{
+					"slug": "green-900",
+					"color": "#01302A",
+					"name": "Verde escuro"
+				},
+				{
+					"slug": "green-800",
+					"color": "#043A39",
+					"name": "Verde petroleo"
+				},
+				{
+					"slug": "cream",
+					"color": "#FDF3E5",
+					"name": "Cream"
+				},
+				{
+					"slug": "gold",
+					"color": "#E8A94E",
+					"name": "Dourado"
+				},
+				{
+					"slug": "ink",
+					"color": "#0B0B0B",
+					"name": "Preto"
+				},
+				{
+					"slug": "pole-red",
+					"color": "#C20B08",
+					"name": "Vermelho poste"
+				},
+				{
+					"slug": "pole-blue",
+					"color": "#044880",
+					"name": "Azul poste"
+				}
+			]
+		},
+		"typography": {
+			"fluid": true,
+			"defaultFontSizes": false,
+			"fontFamilies": [
+				{
+					"slug": "display",
+					"name": "Display",
+					"fontFamily": "Oswald, \"Arial Narrow\", \"Helvetica Neue Condensed\", system-ui, sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Oswald",
+							"fontStyle": "normal",
+							"fontWeight": "500",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/oswald-500.woff2"
+							]
+						},
+						{
+							"fontFamily": "Oswald",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/oswald-700.woff2"
+							]
+						}
+					]
+				},
+				{
+					"slug": "body",
+					"name": "Texto",
+					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+				}
+			],
+			"fontSizes": [
+				{
+					"slug": "small",
+					"size": "0.8125rem",
+					"name": "Pequeno"
+				},
+				{
+					"slug": "medium",
+					"size": "0.9375rem",
+					"name": "Medio"
+				},
+				{
+					"slug": "large",
+					"size": "1.25rem",
+					"name": "Grande"
+				},
+				{
+					"slug": "x-large",
+					"size": "clamp(1.6rem, 1rem + 1.6vw, 2.35rem)",
+					"name": "Titulo"
+				},
+				{
+					"slug": "xx-large",
+					"size": "clamp(2.2rem, 1.4rem + 3vw, 3.4rem)",
+					"name": "Hero"
+				}
+			]
+		},
+		"spacing": {
+			"units": [
+				"px",
+				"rem",
+				"%",
+				"vw"
+			],
+			"spacingSizes": [
+				{
+					"slug": "20",
+					"size": "0.75rem",
+					"name": "1"
+				},
+				{
+					"slug": "30",
+					"size": "1.5rem",
+					"name": "2"
+				},
+				{
+					"slug": "40",
+					"size": "2.5rem",
+					"name": "3"
+				},
+				{
+					"slug": "50",
+					"size": "3rem",
+					"name": "4"
+				},
+				{
+					"slug": "60",
+					"size": "4.5rem",
+					"name": "5"
+				}
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var:preset|color|green-800",
+			"text": "var:preset|color|cream"
+		},
+		"typography": {
+			"fontFamily": "var:preset|font-family|body",
+			"fontSize": "var:preset|font-size|medium",
+			"lineHeight": "1.6"
+		},
+		"spacing": {
+			"blockGap": "var:preset|spacing|30"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|display",
+					"fontWeight": "700",
+					"textTransform": "uppercase",
+					"letterSpacing": "-0.005em",
+					"lineHeight": "1.05"
+				},
+				"color": {
+					"text": "var:preset|color|cream"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var:preset|color|gold"
+				},
+				":hover": {
+					"typography": {
+						"textDecoration": "underline"
+					}
+				}
+			},
+			"button": {
+				"color": {
+					"background": "var:preset|color|gold",
+					"text": "var:preset|color|green-900"
+				},
+				"typography": {
+					"fontWeight": "700",
+					"textTransform": "uppercase",
+					"letterSpacing": "0.08em",
+					"fontSize": "var:preset|font-size|small"
+				},
+				"border": {
+					"radius": "2px"
+				},
+				"spacing": {
+					"padding": {
+						"top": "0.9em",
+						"bottom": "0.9em",
+						"left": "1.8em",
+						"right": "1.8em"
+					}
+				},
+				":hover": {
+					"color": {
+						"background": "var:preset|color|cream",
+						"text": "var:preset|color|green-900"
+					}
+				}
+			}
+		}
+	},
+	"templateParts": [
+		{
+			"name": "header",
+			"title": "Cabecalho",
+			"area": "header"
+		},
+		{
+			"name": "footer",
+			"title": "Rodape",
+			"area": "footer"
+		}
+	]
+}
