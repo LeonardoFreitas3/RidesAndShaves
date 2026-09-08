@@ -40,8 +40,8 @@ $ras_montra = array(
 	array( 'produto-4', 'Kit Viagem',        '29,90' ),
 );
 ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"green-900","layout":{"type":"constrained","wideSize":"1280px"}} -->
-<div class="wp-block-group alignfull has-green-900-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--40)"><!-- wp:columns {"align":"wide"} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"green-950","layout":{"type":"constrained","wideSize":"1280px"}} -->
+<div class="wp-block-group alignfull has-green-950-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--40)"><!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide"><!-- wp:column {"width":"24%"} -->
 <div class="wp-block-column" style="flex-basis:24%"><!-- wp:heading {"fontSize":"x-large"} -->
 <h2 class="wp-block-heading has-x-large-font-size">Rides and Shaves<br><mark style="background-color:rgba(0,0,0,0)" class="has-inline-color has-gold-color">Shop</mark></h2>
