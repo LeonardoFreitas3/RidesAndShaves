@@ -4,11 +4,26 @@
  * Slug: rides-and-shaves/journal
  * Categories: rides-and-shaves
  * Description: Faixa de artigos, quatro cartões com miniatura.
+ *
+ * ponytail: mostra artigos a sério quando existirem. Enquanto não houver, os
+ * quatro cartões do mockup ficam como montra — mas sem "Ler artigo", que não
+ * levava a lado nenhum. Assim que publicarem o primeiro post, a secção troca
+ * sozinha, tal como a da loja.
  */
 
 $ras_uri = get_stylesheet_directory_uri();
 
-$ras_artigos = array(
+$ras_posts = get_posts(
+	array(
+		'numberposts' => 4,
+		'post_status' => 'publish',
+	)
+);
+
+// Miniaturas de reserva, para um post sem imagem destacada não ficar vazio.
+$ras_fallback = array( 'journal-1', 'journal-2', 'journal-3', 'journal-4' );
+
+$ras_montra = array(
 	array( 'journal-1', 'Como escolher o corte certo para o teu rosto?' ),
 	array( 'journal-2', 'Como cuidar da barba em casa?' ),
 	array( 'journal-3', 'O que é um Hot Towel Shave?' ),
@@ -26,35 +41,49 @@ $ras_artigos = array(
 <h2 class="wp-block-heading has-x-large-font-size">Dicas, inspiração e conhecimento.</h2>
 <!-- /wp:heading -->
 
+<?php // Na propria pagina /journal o botao apontaria para si mesmo. ?>
+<?php if ( $ras_posts && ! is_page( 'journal' ) ) : ?>
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/journal">Ver todos os artigos</a></div>
 <!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- /wp:buttons -->
+<?php endif; ?>
+</div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"76%"} -->
-<div class="wp-block-column" style="flex-basis:76%"><!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|20"}}}} -->
-<div class="wp-block-columns">
-<?php foreach ( $ras_artigos as list( $img, $titulo ) ) : ?>
-<!-- wp:column {"className":"ras-artigo"} -->
-<div class="wp-block-column ras-artigo"><!-- wp:image -->
-<figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/$img.jpg" ); ?>" alt="<?php echo esc_attr( $titulo ); ?>"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:group {"className":"ras-artigo-body","layout":{"type":"constrained"}} -->
-<div class="wp-block-group ras-artigo-body"><!-- wp:heading {"level":3,"fontSize":"small"} -->
-<h3 class="wp-block-heading has-small-font-size"><?php echo esc_html( $titulo ); ?></h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"textColor":"gold","fontSize":"small"} -->
-<p class="has-gold-color has-text-color has-small-font-size"><a href="/journal">Ler artigo →</a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-<?php endforeach; ?>
-</div>
-<!-- /wp:columns --></div>
+<div class="wp-block-column" style="flex-basis:76%"><!-- wp:html -->
+<ul class="ras-artigos">
+<?php if ( $ras_posts ) : ?>
+	<?php foreach ( $ras_posts as $ras_i => $ras_post ) : ?>
+	<li class="ras-artigo">
+		<a class="ras-artigo-foto" href="<?php echo esc_url( get_permalink( $ras_post ) ); ?>">
+			<?php if ( has_post_thumbnail( $ras_post ) ) : ?>
+				<?php echo get_the_post_thumbnail( $ras_post, 'medium_large' ); ?>
+			<?php else : ?>
+				<img src="<?php echo esc_url( "$ras_uri/assets/img/{$ras_fallback[ $ras_i % 4 ]}.jpg" ); ?>" alt="">
+			<?php endif; ?>
+		</a>
+		<div class="ras-artigo-body">
+			<h3><a href="<?php echo esc_url( get_permalink( $ras_post ) ); ?>"><?php echo esc_html( get_the_title( $ras_post ) ); ?></a></h3>
+			<p><a href="<?php echo esc_url( get_permalink( $ras_post ) ); ?>">Ler artigo &rarr;</a></p>
+		</div>
+	</li>
+	<?php endforeach; ?>
+<?php else : ?>
+	<?php foreach ( $ras_montra as list( $ras_img, $ras_titulo ) ) : ?>
+	<li class="ras-artigo">
+		<span class="ras-artigo-foto"><img src="<?php echo esc_url( "$ras_uri/assets/img/$ras_img.jpg" ); ?>" alt=""></span>
+		<div class="ras-artigo-body">
+			<h3><?php echo esc_html( $ras_titulo ); ?></h3>
+			<p class="ras-embreve">Em breve</p>
+		</div>
+	</li>
+	<?php endforeach; ?>
+<?php endif; ?>
+</ul>
+<!-- /wp:html --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
