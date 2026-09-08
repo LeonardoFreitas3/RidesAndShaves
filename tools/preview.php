@@ -141,7 +141,7 @@ define( 'PREVIEW_CSS', <<<'CSS'
 *{box-sizing:border-box}
 body{margin:0;background:var(--wp--preset--color--green-800);color:var(--wp--preset--color--cream);
   font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-h1,h2,h3{font-family:Oswald,"Arial Narrow",system-ui,sans-serif;font-weight:800;text-transform:uppercase;
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:800;text-transform:uppercase;
   letter-spacing:.01em;line-height:1.05;margin:0 0 .4em;color:var(--wp--preset--color--cream)}
 p{margin:0 0 1rem}
 a{color:var(--wp--preset--color--gold)}

@@ -19,12 +19,12 @@
 				},
 				{
 					"slug": "green-900",
-					"color": "#01302A",
+					"color": "#04241E",
 					"name": "Verde escuro"
 				},
 				{
 					"slug": "green-800",
-					"color": "#043A39",
+					"color": "#073028",
 					"name": "Verde petroleo"
 				},
 				{
@@ -61,24 +61,15 @@
 				{
 					"slug": "display",
 					"name": "Display",
-					"fontFamily": "Oswald, \"Arial Narrow\", \"Helvetica Neue Condensed\", system-ui, sans-serif",
+					"fontFamily": "\"Barlow Condensed\", \"Arial Narrow\", system-ui, sans-serif",
 					"fontFace": [
 						{
-							"fontFamily": "Oswald",
-							"fontStyle": "normal",
-							"fontWeight": "500",
-							"fontDisplay": "swap",
-							"src": [
-								"file:./assets/fonts/oswald-500.woff2"
-							]
-						},
-						{
-							"fontFamily": "Oswald",
+							"fontFamily": "Barlow Condensed",
 							"fontStyle": "normal",
 							"fontWeight": "700",
 							"fontDisplay": "swap",
 							"src": [
-								"file:./assets/fonts/oswald-700.woff2"
+								"file:./assets/fonts/barlow-condensed-700.woff2"
 							]
 						}
 					]
