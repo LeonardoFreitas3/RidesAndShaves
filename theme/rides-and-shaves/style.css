@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.0.1
+Version: 1.1.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -552,4 +552,74 @@ main.wp-block-group > * {
 .woocommerce-result-count,
 .woocommerce-ordering {
 	display: none;
+}
+
+/* --- Cabecalho sobreposto ao banner --------------------------------------- */
+/* So na homepage: nas paginas internas o menu assenta sobre uma faixa lisa,
+   onde transparente e opaco sao indistinguiveis, e sairia do fluxo por cima
+   do conteudo. */
+.home header.wp-block-template-part {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 20;
+}
+
+.home header.wp-block-template-part .wp-block-group.has-green-950-background-color {
+	background-color: transparent;
+}
+
+/* Vela escura por baixo do menu: o banner tem zonas claras (o candeeiro, a
+   parede ao fundo) e sem isto o logotipo e os links perdiam-se por cima delas. */
+.home header.wp-block-template-part::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 92%, transparent) 0%,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 50%, transparent) 60%,
+		transparent 100%
+	);
+	pointer-events: none;
+}
+
+.home header.wp-block-template-part > * {
+	position: relative;
+}
+
+/* Medido no site: o cabecalho fica com 134px. A altura minima do banner e o
+   avanco do texto garantem que o titulo passa por baixo dele com folga, em vez
+   de depender do alinhamento ao centro — que falhava em ecras baixos. */
+.home .ras-hero img {
+	min-height: clamp(600px, 74vh, 700px);
+}
+
+.home .ras-hero-texto {
+	padding-top: calc(var(--wp--preset--spacing--60) + 5rem);
+}
+
+/* Em mobile as colunas empilham e o menu ficaria por cima do titulo sem foto
+   por baixo. Volta a barra normal. */
+@media (max-width: 781px) {
+	.home header.wp-block-template-part {
+		position: static;
+	}
+
+	.home header.wp-block-template-part::before {
+		display: none;
+	}
+
+	.home header.wp-block-template-part .wp-block-group.has-green-950-background-color {
+		background-color: var(--wp--preset--color--green-950);
+	}
+
+	.home .ras-hero img {
+		min-height: 360px;
+	}
+
+	.home .ras-hero-texto {
+		padding-top: var(--wp--preset--spacing--50);
+	}
 }
