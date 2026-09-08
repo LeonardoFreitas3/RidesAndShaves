@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.8.0
+Version: 1.9.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -682,54 +682,22 @@ main.wp-block-group > * {
 	padding-inline: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
 }
 
-/* Em mobile as colunas empilham e o menu ficaria por cima do titulo sem foto
-   por baixo. Volta a barra normal. */
+/* Em mobile o banner segue o mesmo tratamento do desktop: foto a cobrir tudo,
+   menu transparente por cima, texto sobre gradiente. So muda a direcao do
+   gradiente — com as colunas empilhadas o texto ocupa a largura toda, por isso
+   a vela tem de ser de cima para baixo e nao da esquerda para a direita. */
 @media (max-width: 781px) {
-	.home header.wp-block-template-part {
-		position: static;
-	}
-
-	.home header.wp-block-template-part::before {
-		display: none;
-	}
-
-	.home header.wp-block-template-part .wp-block-group.has-green-950-background-color {
-		background-color: var(--wp--preset--color--green-950);
-	}
-
-	.home .ras-banner {
-		min-height: 0;
-	}
-
-	.home .ras-banner .ras-hero {
-		position: static;
-		width: auto;
-		flex: 1 1 0;
-	}
-
-	/* A imagem tambem tem de voltar ao fluxo: o position:absolute nela e na
-	   figure vinha das regras de desktop e, sem isto, ficava por baixo do texto
-	   com as colunas ja empilhadas. */
-	.home .ras-banner .ras-hero figure,
-	.home .ras-banner .ras-hero img {
-		position: static;
-		height: auto;
-	}
-
-	.home .ras-banner .ras-hero img {
-		min-height: 300px;
+	.home {
+		--ras-header: 96px;
 	}
 
 	.home .ras-banner .ras-hero::after {
 		background: linear-gradient(
-			to bottom,
-			transparent 40%,
-			color-mix(in srgb, var(--wp--preset--color--green-950) 70%, transparent) 100%
+			180deg,
+			color-mix(in srgb, var(--wp--preset--color--green-950) 90%, transparent) 0%,
+			color-mix(in srgb, var(--wp--preset--color--green-950) 72%, transparent) 55%,
+			color-mix(in srgb, var(--wp--preset--color--green-950) 30%, transparent) 100%
 		);
-	}
-
-	.home .ras-hero-texto {
-		padding-top: var(--wp--preset--spacing--50);
 	}
 }
 
