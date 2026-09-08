@@ -10,8 +10,8 @@ $ras_uri = get_stylesheet_directory_uri();
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"green-950","textColor":"cream","layout":{"type":"constrained","wideSize":"1600px"}} -->
 <div class="wp-block-group alignfull has-cream-color has-green-950-background-color has-text-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"verticalAlignment":"center","align":"full","isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"top":"0","left":"0"},"margin":{"top":"0","bottom":"0"}}}} -->
-<div class="wp-block-columns alignfull are-vertically-aligned-center" style="margin-top:0;margin-bottom:0"><!-- wp:column {"verticalAlignment":"center","width":"46%","className":"ras-hero-texto","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|50","right":"var:preset|spacing|40"}}}} -->
-<div class="wp-block-column is-vertically-aligned-center ras-hero-texto" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);flex-basis:46%"><!-- wp:heading {"level":1,"fontSize":"xx-large"} -->
+<div class="wp-block-columns alignfull are-vertically-aligned-center" style="margin-top:0;margin-bottom:0"><!-- wp:column {"verticalAlignment":"center","width":"56%","className":"ras-hero-texto","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|50","right":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-column is-vertically-aligned-center ras-hero-texto" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);flex-basis:56%"><!-- wp:heading {"level":1,"fontSize":"xx-large"} -->
 <h1 class="wp-block-heading has-xx-large-font-size">Barbearia,<br><mark style="background-color:rgba(0,0,0,0)" class="has-inline-color has-gold-color">Grooming &amp;</mark><br>Lifestyle.</h1>
 <!-- /wp:heading -->
 
@@ -34,8 +34,8 @@ $ras_uri = get_stylesheet_directory_uri();
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"center","width":"54%","className":"ras-hero"} -->
-<div class="wp-block-column is-vertically-aligned-center ras-hero" style="flex-basis:54%"><!-- wp:image -->
+<!-- wp:column {"verticalAlignment":"center","width":"44%","className":"ras-hero"} -->
+<div class="wp-block-column is-vertically-aligned-center ras-hero" style="flex-basis:44%"><!-- wp:image -->
 <figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/hero.jpg" ); ?>" alt="Barbeiro a fazer a barba a um cliente na Rides and Shaves"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
