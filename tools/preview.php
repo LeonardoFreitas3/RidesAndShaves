@@ -96,7 +96,11 @@ function build( $html, $theme, $parts ) {
 
 	$html = preg_replace_callback(
 		'/<!--\s*wp:template-part\s*\{[^}]*"slug":"([a-z-]+)"[^}]*\}\s*\/-->/',
-		fn( $m ) => $parts[ $m[1] ] ?? '',
+		fn( $m ) => 'header' === $m[1]
+			? '<header class="wp-block-template-part">' . ( $parts[ $m[1] ] ?? '' ) . '</header>'
+			: ( 'footer' === $m[1]
+				? '<footer class="wp-block-template-part">' . ( $parts[ $m[1] ] ?? '' ) . '</footer>'
+				: ( $parts[ $m[1] ] ?? '' ) ),
 		$html
 	);
 
@@ -115,7 +119,27 @@ function build( $html, $theme, $parts ) {
 		'<div class="stub-products">' . str_repeat( '<div class="stub-product"><img src="theme/rides-and-shaves/assets/img/produto-1.jpg" alt=""><p>Produto</p><p class="ras-price">16,90&euro;</p></div>', 4 ) . '</div>',
 		$html
 	);
-	$html = preg_replace( '/<!--\s*wp:(site-logo|woocommerce\/mini-cart|social-links?|social-link|home-link|navigation-link)[^>]*?\/-->/', '', $html );
+	// Cabecalho: o preview desenhava o header sem logotipo nem menu, e era
+	// justamente ai que estavam as duvidas. Passa a aproximar os blocos do
+	// WordPress para se poder ver o banner completo antes de fazer upload.
+	$html = preg_replace(
+		'/<!--\s*wp:site-logo[^>]*?\/-->/',
+		'<span class="wp-block-site-logo"><img src="theme/rides-and-shaves/assets/logo.png" alt=""></span>',
+		$html
+	);
+	$html = preg_replace_callback(
+		'/<!--\s*wp:(?:navigation-link|home-link)\s*\{[^}]*"label":"([^"]+)"[^}]*\}\s*\/-->/',
+		fn( $m ) => '<li class="wp-block-navigation-item"><a href="#">' . $m[1] . '</a></li>',
+		$html
+	);
+	$html = preg_replace( '/<!--\s*wp:navigation[^>]*?-->/', '<nav class="wp-block-navigation"><ul>', $html );
+	$html = str_replace( '<!-- /wp:navigation -->', '</ul></nav>', $html );
+	$html = preg_replace(
+		'/<!--\s*wp:woocommerce\/mini-cart[^>]*?\/-->/',
+		'<span class="stub-cart">&#128717;</span>',
+		$html
+	);
+	$html = preg_replace( '/<!--\s*wp:(social-links?|social-link)[^>]*?\/-->/', '', $html );
 	$html = preg_replace( '/<!--\s*\/?wp:[^>]*?-->/s', '', $html );
 	return $html;
 }
@@ -150,6 +174,15 @@ img{max-width:100%;height:auto;display:block}
 .has-text-align-center{text-align:center}
 .aligncenter{margin-inline:auto}
 figure{margin:0}
+.wp-block-site-logo img{width:110px;height:auto;display:block}
+.wp-block-navigation ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0}
+.wp-block-navigation a{color:var(--wp--preset--color--cream);text-decoration:none;
+  text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;font-weight:600}
+.wp-block-navigation li:first-child a{color:var(--wp--preset--color--gold)}
+.stub-cart{font-size:1.1rem;color:var(--wp--preset--color--cream)}
+header.wp-block-template-part{display:block;width:100%}
+header .wp-block-group>.wp-block-group{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+header .wp-block-group>.wp-block-group>.wp-block-group{gap:1rem}
 .stub-products{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .stub-product{border:1px solid rgba(232,169,78,.18);padding:.75rem;text-align:center;font-size:.85rem}
 
@@ -180,7 +213,8 @@ foreach ( $templates as $t ) {
 		. "
 .ras-nav a{margin-right:1rem;text-transform:uppercase;letter-spacing:.08em}"
 		. STYLE_CLOSE
-		. "<div class='ras-nav'>$nav</div>" . $body;
+		. "<body class='" . ( 'front-page' === $slug ? 'home' : '' ) . "'>"
+		. "<div class='ras-nav'>$nav</div>" . $body . "</body>";
 
 	file_put_contents( __DIR__ . "/../_preview-$slug.html", $out );
 	echo "escrito _preview-$slug.html
