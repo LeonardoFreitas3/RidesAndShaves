@@ -75,7 +75,11 @@ function Save-Produto {
 
 Write-Output 'Secoes:'
 # Origens a 2624x1632 (1.607) e o alvo a 1.6 — corte quase nulo.
-Save-Region $HERO      0    0 2624 1632 1600 1000 (Join-Path $dest 'hero.jpg')
+# O banner passou a ocupar a largura toda e e muito mais largo que alto. Um
+# recorte 1.6:1 obrigava o object-fit a cortar em cima e em baixo, e a foto
+# aparecia ampliada. Recorte largo (2.4:1) tirado da altura util do original,
+# e o dobro da resolucao para nao esticar em ecras grandes.
+Save-Region $HERO      0  170 2624 1093 2400 1000 (Join-Path $dest 'hero.jpg')
 Save-Region $INTERIOR  0    0 2624 1632  900  560 (Join-Path $dest 'loja-nogueiro.jpg')
 Save-Region $MONTRA    0    0 2624 1632  900  560 (Join-Path $dest 'loja-lamacaes.jpg')
 # Vertical 9:10 encostado a esquerda, onde esta a mota cromada.

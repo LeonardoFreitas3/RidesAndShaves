@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.3.0
+Version: 1.4.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -577,16 +577,18 @@ main.wp-block-group > * {
 	background-color: transparent;
 }
 
-/* Vela escura por baixo do menu: o banner tem zonas claras (o candeeiro, a
-   parede ao fundo) e sem isto o logotipo e os links perdiam-se por cima delas. */
+/* Vela por baixo do menu. Leve de proposito: densa demais e o cabecalho lia-se
+   como uma barra escura colada por cima em vez de fazer parte do banner. Este
+   valor e o minimo que mantem o logotipo e os links legiveis sobre as zonas
+   claras da foto — o candeeiro e os frascos na prateleira. */
 .home header.wp-block-template-part::before {
 	content: "";
 	position: absolute;
 	inset: 0;
 	background: linear-gradient(
 		to bottom,
-		color-mix(in srgb, var(--wp--preset--color--green-950) 92%, transparent) 0%,
-		color-mix(in srgb, var(--wp--preset--color--green-950) 50%, transparent) 60%,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 55%, transparent) 0%,
+		color-mix(in srgb, var(--wp--preset--color--green-950) 18%, transparent) 55%,
 		transparent 100%
 	);
 	pointer-events: none;
