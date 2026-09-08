@@ -22,6 +22,19 @@ function esc_html( $s ) {
 function esc_attr( $s ) {
 	return htmlspecialchars( $s, ENT_QUOTES );
 }
+// Stubs do WordPress/WooCommerce. O preview nao tem base de dados, por isso o
+// catalogo mostra os quatro produtos da montra estatica.
+function have_posts() {
+	return false;
+}
+function the_post() {}
+function wp_reset_postdata() {}
+function the_posts_pagination( $a = array() ) {}
+function wc_get_product( $id = 0 ) {
+	return null;
+}
+function ras_cartao_produto( $p ) {}
+
 // O preview renderiza a homepage: nenhuma pagina interna esta ativa.
 function is_page( $slug ) {
 	return isset( $GLOBALS['ras_pagina_atual'] ) && $GLOBALS['ras_pagina_atual'] === $slug;
