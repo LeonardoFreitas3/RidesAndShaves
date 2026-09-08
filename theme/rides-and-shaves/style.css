@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.9.1
+Version: 2.0.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -446,11 +446,44 @@ main.wp-block-group > * {
 	margin-inline: 0;
 }
 
-/* Icone de conta que o WooCommerce injecta no cabecalho. Nao esta no mockup.
-   ponytail: esconder e uma linha; tirar o bloco exigia mexer no template part
-   guardado na base de dados, que o cliente perde ao editar no Site Editor. */
-.wp-block-woocommerce-customer-account {
-	display: none;
+/* --- Cluster de accoes do cabecalho --------------------------------------- */
+/* O WooCommerce injecta o bloco de conta entre a navegacao e o grupo do botao,
+   o que o deixava perdido a meio. A ordem e definida aqui para o botao, o
+   carrinho e a conta ficarem juntos a direita, com a navegacao ao centro. */
+header .wp-block-site-logo {
+	order: 0;
+}
+
+header .wp-block-navigation {
+	order: 1;
+	margin-inline: auto;
+}
+
+header .ras-header-acoes {
+	order: 2;
+	gap: var(--wp--preset--spacing--20);
+}
+
+header .wp-block-woocommerce-customer-account {
+	order: 3;
+	display: flex;
+	align-items: center;
+}
+
+header .wc-block-customer-account__account-icon,
+header .wp-block-woocommerce-customer-account svg {
+	width: 1.35rem;
+	height: 1.35rem;
+	fill: currentColor;
+}
+
+header .wp-block-woocommerce-customer-account a {
+	display: flex;
+	color: var(--wp--preset--color--cream);
+}
+
+header .wp-block-woocommerce-customer-account a:hover {
+	color: var(--wp--preset--color--gold);
 }
 
 /* --- Cor das letras: dois acertos face ao mockup -------------------------- */
@@ -714,11 +747,19 @@ main.wp-block-group > * {
 		font-size: 0.7rem;
 	}
 
-	/* Hamburguer no extremo direito, depois do carrinho. No markup a navegacao
-	   vem a seguir ao logotipo, porque em desktop e o menu ao centro; em mobile
-	   vira icone e o sitio dele e no fim. */
+	/* Hamburguer no fim e o cluster todo encostado a direita. Sem o margin-left
+	   automatico o space-between espalhava os tres pelo cabecalho todo. */
 	header .wp-block-navigation {
-		order: 3;
+		order: 4;
+		margin-inline: 0;
+	}
+
+	header .ras-header-acoes {
+		margin-left: auto;
+	}
+
+	header .wp-block-group.is-layout-flex {
+		gap: 0.7rem;
 	}
 
 	header .wp-block-button.is-icon-cal > .wp-block-button__link::before {
