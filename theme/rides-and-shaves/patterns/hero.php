@@ -17,7 +17,7 @@ $ras_v = wp_get_theme()->get( 'Version' );
 <div class="wp-block-group alignfull ras-banner has-cream-color has-green-950-background-color has-text-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"verticalAlignment":"center","align":"full","isStackedOnMobile":true,"style":{"spacing":{"blockGap":{"top":"0","left":"0"},"margin":{"top":"0","bottom":"0"}}}} -->
 <div class="wp-block-columns alignfull are-vertically-aligned-center" style="margin-top:0;margin-bottom:0"><!-- wp:column {"verticalAlignment":"center","width":"56%","className":"ras-hero-texto"} -->
 <div class="wp-block-column is-vertically-aligned-center ras-hero-texto" style="flex-basis:56%"><!-- wp:heading {"level":1,"fontSize":"xx-large"} -->
-<h1 class="wp-block-heading has-xx-large-font-size">Barbearia,<br><mark style="background-color:rgba(0,0,0,0)" class="has-inline-color has-gold-color">Grooming &amp;</mark><br>Lifestyle.</h1>
+<h1 class="wp-block-heading has-xx-large-font-size">Enjoy<br><mark style="background-color:rgba(0,0,0,0)" class="has-inline-color has-gold-color">the ride.</mark></h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"large"} -->

@@ -34,6 +34,13 @@ function wc_get_product( $id = 0 ) {
 	return null;
 }
 function ras_cartao_produto( $p ) {}
+function wp_get_theme() {
+	return new class() {
+		public function get( $k ) {
+			return 'preview';
+		}
+	};
+}
 
 // O preview renderiza a homepage: nenhuma pagina interna esta ativa.
 function is_page( $slug ) {
