@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 1.7.0
+Version: 1.8.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -256,6 +256,7 @@ Text Domain: rides-and-shaves
 .ras-produto img {
 	display: block;
 	width: 100%;
+	height: auto;
 	aspect-ratio: 1;
 	object-fit: cover;
 }
@@ -706,9 +707,17 @@ main.wp-block-group > * {
 		flex: 1 1 0;
 	}
 
+	/* A imagem tambem tem de voltar ao fluxo: o position:absolute nela e na
+	   figure vinha das regras de desktop e, sem isto, ficava por baixo do texto
+	   com as colunas ja empilhadas. */
+	.home .ras-banner .ras-hero figure,
 	.home .ras-banner .ras-hero img {
-		min-height: 360px;
+		position: static;
 		height: auto;
+	}
+
+	.home .ras-banner .ras-hero img {
+		min-height: 300px;
 	}
 
 	.home .ras-banner .ras-hero::after {
@@ -721,5 +730,42 @@ main.wp-block-group > * {
 
 	.home .ras-hero-texto {
 		padding-top: var(--wp--preset--spacing--50);
+	}
+}
+
+/* --- Mobile ---------------------------------------------------------------- */
+@media (max-width: 781px) {
+	/* O cabecalho ocupava 210px de 812: logotipo grande e o botao a partir para
+	   uma segunda linha. Cabe tudo numa linha so. */
+	header .wp-block-site-logo img {
+		width: 72px;
+	}
+
+	header .wp-block-button__link {
+		padding: 0.6em 0.9em;
+		font-size: 0.7rem;
+	}
+
+	header .wp-block-button.is-icon-cal > .wp-block-button__link::before {
+		margin-right: 0.4em;
+	}
+
+	/* Empilhados, os cartoes de servico esticavam todos a altura do mais alto e
+	   o margin-top:auto do botao abria buracos no meio. Cada um passa a medir o
+	   seu conteudo. */
+	.ras-services > .wp-block-columns {
+		align-items: normal;
+	}
+
+	.ras-service {
+		padding-block: var(--wp--preset--spacing--30);
+	}
+
+	.ras-service h3 {
+		min-height: 0;
+	}
+
+	.ras-service .wp-block-buttons {
+		margin-top: var(--wp--preset--spacing--20);
 	}
 }
