@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 0.9.0
+Version: 1.0.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -219,72 +219,6 @@ Text Domain: rides-and-shaves
 
 .ras-autor p {
 	margin: 0;
-}
-
-/* --- Cartoes do Journal --------------------------------------------------- */
-.ras-artigos {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: var(--wp--preset--spacing--20);
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.ras-artigo {
-	display: flex;
-	flex-direction: column;
-	border: 1px solid var(--ras-line-soft);
-	overflow: hidden;
-}
-
-.ras-artigo-foto {
-	display: block;
-	line-height: 0;
-}
-
-.ras-artigo img {
-	display: block;
-	width: 100%;
-	height: 150px;
-	object-fit: cover;
-}
-
-.ras-artigo-body {
-	padding: var(--wp--preset--spacing--20);
-}
-
-.ras-artigo-body h3 {
-	font-size: 0.8125rem;
-	margin: 0 0 0.4rem;
-}
-
-.ras-artigo-body h3 a {
-	color: var(--wp--preset--color--cream);
-	text-decoration: none;
-}
-
-.ras-artigo-body h3 a:hover {
-	color: var(--wp--preset--color--gold);
-}
-
-.ras-artigo-body p {
-	margin: 0;
-	font-size: 0.8125rem;
-}
-
-/* Sem artigos publicados: os cartoes ficam como montra, sem link morto. */
-.ras-embreve {
-	color: color-mix(in srgb, var(--wp--preset--color--cream) 55%, transparent);
-	text-transform: uppercase;
-	letter-spacing: 0.12em;
-	font-size: 0.6875rem;
-}
-
-@media (max-width: 781px) {
-	.ras-artigos {
-		grid-template-columns: repeat(2, 1fr);
-	}
 }
 
 /* --- Montra da homepage --------------------------------------------------- */

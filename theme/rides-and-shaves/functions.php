@@ -67,7 +67,6 @@ add_action(
 			'servicos'  => 'Serviços',
 			'lojas'     => 'Lojas',
 			'sobre'     => 'Sobre',
-			'journal'   => 'Journal',
 			'contactos' => 'Contactos',
 		);
 

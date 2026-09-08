@@ -34,21 +34,6 @@ function wc_get_product( $id = 0 ) {
 	return null;
 }
 function ras_cartao_produto( $p ) {}
-function get_posts( $a = array() ) {
-	return array();
-}
-function has_post_thumbnail( $p = null ) {
-	return false;
-}
-function get_the_post_thumbnail( $p = null, $s = '' ) {
-	return '';
-}
-function get_permalink( $p = null ) {
-	return '#';
-}
-function get_the_title( $p = null ) {
-	return '';
-}
 
 // O preview renderiza a homepage: nenhuma pagina interna esta ativa.
 function is_page( $slug ) {

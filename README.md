@@ -15,9 +15,10 @@ theme/rides-and-shaves/   o tema
   assets/img/*.jpg        placeholders de fotografia
   screenshot.png          cartão do tema em Aparência → Temas
   parts/                  header (com menu), footer
-  patterns/               hero, servicos, lojas, sobre, shop, journal,
-                          reviews, contactos, cta
-  templates/              front-page + page-servicos/lojas/sobre/journal/contactos
+  patterns/               hero, servicos, lojas, sobre, shop, reviews,
+                          loja (catálogo), contactos
+  templates/              front-page, archive-product,
+                          page-servicos/lojas/sobre/contactos
   tools/check-blocks.php  verifica tudo sem WordPress
 tools/preview.php         renderiza todas as páginas fora do WordPress
 tools/make-placeholders.ps1
@@ -40,7 +41,6 @@ powershell -ExecutionPolicy Bypass -File tools\import-fotos.ps1
 | `sobre.jpg` | recorte vertical da sala com a mota cromada | 900×1000 |
 | `produto-1.jpg` | boião de pomada, já com o logótipo | 700×700 |
 | `produto-2..4.jpg` | recortados da foto dos três produtos | 700×700 |
-| `journal-1..4.jpg` | recortes das fotos das secções | 600×400 |
 
 Os ícones dos serviços (`assets/icons/`) são SVG desenhados de raiz, na cor da marca.
 O emblema sem fundo sai de `tools/make-transparent-logo.ps1`.
@@ -69,8 +69,8 @@ Cada página é desenhada pelo template `page-{slug}.html`, que puxa o pattern
 respetivo mais a faixa de CTA. O conteúdo da página fica vazio de propósito — só
 precisa de existir para o WordPress ter onde aplicar o template.
 
-O menu do header já vem preenchido (Início · Serviços · Lojas · Sobre · Shop ·
-Contactos); o WordPress cria o menu a partir dele na primeira visita.
+O menu do header já vem preenchido (Início · Serviços · Barbearia · Lojas ·
+Shop · Contactos); o WordPress cria o menu a partir dele na primeira visita.
 
 **Onde editar o quê:**
 
@@ -139,9 +139,9 @@ php theme/rides-and-shaves/tools/check-blocks.php
 - **Marcações não vivem aqui.** Estão na AppBarber. Todos os botões apontam para `/marcar`,
   que o `functions.php` redireciona. Se um dia quiserem marcação no próprio site, morre o
   redirect e nasce uma página — o resto do site não muda.
-- **Journal cortado.** 4 artigos no mockup é um compromisso de conteúdo que morre ao terceiro
-  mês. Se quiserem SEO, uma página só ("Como cuidar da barba em casa") a apontar para os
-  produtos vende mais.
+- **Journal cortado**, por decisão do cliente. Estava na homepage por fidelidade ao mockup,
+  mas sem artigos escritos eram cinco links que não iam a lado nenhum. Se voltar, o pattern
+  está no histórico do git (commit anterior a 1.0.0).
 - **Shop subiu** para a 4.ª secção, antes do "sobre nós". É onde o site gera dinheiro.
 - **Grelha de serviços é uma caixa com moldura**, com divisórias verticais entre serviços,
   como no mockup — não seis cartões soltos.
