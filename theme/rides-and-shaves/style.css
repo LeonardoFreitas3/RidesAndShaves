@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 2.1.0
+Version: 2.2.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -715,6 +715,24 @@ header .wp-block-woocommerce-customer-account a:hover {
 	padding-inline: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
 }
 
+/* Emblema a sangrar pela direita, por cima da foto e por baixo do texto
+   (z-index 1, entre a foto a 0 e a coluna de texto a 2). A opacidade e o unico
+   numero a mexer se ficar a competir com o titulo.
+   ponytail: o ficheiro tem 512px e aqui aparece a ~860 — a 38% de opacidade nao
+   se ve. Se um dia subir a opacidade, e preciso arte maior. */
+.home .ras-banner .ras-marca {
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	top: 50%;
+	transform: translate(28%, -50%);
+	height: min(86vh, 860px);
+	width: auto;
+	opacity: 0.38;
+	pointer-events: none;
+	user-select: none;
+}
+
 /* Em mobile o banner segue o mesmo tratamento do desktop: foto a cobrir tudo,
    menu transparente por cima, texto sobre gradiente. So muda a direcao do
    gradiente — com as colunas empilhadas o texto ocupa a largura toda, por isso
@@ -731,6 +749,16 @@ header .wp-block-woocommerce-customer-account a:hover {
 			color-mix(in srgb, var(--wp--preset--color--green-950) 72%, transparent) 55%,
 			color-mix(in srgb, var(--wp--preset--color--green-950) 30%, transparent) 100%
 		);
+	}
+
+	/* Empilhado, o texto ocupa a largura toda: o emblema desce para o canto e
+	   encolhe para nao ficar atras das letras. */
+	.home .ras-banner .ras-marca {
+		top: auto;
+		bottom: 0;
+		height: min(38vh, 360px);
+		transform: translate(40%, 12%);
+		opacity: 0.26;
 	}
 }
 
