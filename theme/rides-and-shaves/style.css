@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 2.4.0
+Version: 2.5.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -717,21 +717,26 @@ header .wp-block-woocommerce-customer-account a:hover {
 
 
 /* --- Emblema como marca de agua ------------------------------------------- */
-/* Cortado pela margem direita, so metade a vista, como na referencia.
-   Duas copias com a mesma geometria, por isso a transicao entre elas nao se ve:
-   - .ras-marca vive dentro do banner e e mais forte (0.3), porque ali esta por
-     cima de uma fotografia escura e a 0.14 desaparecia;
-   - body::after e fixa ao ecra e acompanha o scroll no resto do site.
+/* Metade a vista, cortado pela margem direita, como na referencia.
+   Duas copias com exatamente a mesma geometria e a mesma opacidade:
+   - .ras-marca vive dentro do banner e sai com ele no scroll;
+   - body::after e fixa ao ecra e acompanha o resto do site.
    O banner leva z-index 1 e tapa a copia fixa enquanto esta no ecra, senao
-   viam-se as duas ao mesmo tempo a afastarem-se uma da outra no scroll.
+   viam-se as duas ao mesmo tempo a afastarem-se uma da outra.
+
+   mix-blend-mode: screen tira a mancha escura do desenho — com screen, preto
+   nao pinta nada e so ficam as linhas claras e o dourado, como o desenho a
+   linha branca da referencia. Sem isto a mota lia-se como um bloco escuro
+   pousado por cima da fotografia.
 
    ponytail: um ::after no body em vez de uma imagem em cada template — o URL
    relativo resolve a partir do style.css, por isso nao precisa de PHP.
    z-index 0 poe a marca acima dos fundos das seccoes (que sao opacos, um valor
-   negativo escondia-a) e abaixo do cabecalho. A opacidade e o unico numero a
-   mexer: acima de ~0.2 comeca a competir com o texto das seccoes. */
+   negativo escondia-a) e abaixo do cabecalho. */
 :root {
 	--ras-marca: min(80vh, 760px);
+	/* O unico numero a mexer. Vale para as duas copias. */
+	--ras-marca-opacidade: 0.45;
 }
 
 body::after,
@@ -739,10 +744,13 @@ body::after,
 	content: "";
 	top: 50%;
 	right: 0;
-	transform: translate(40%, -50%);
+	/* 50% para fora: ve-se metade, o resto e cortado pela margem. */
+	transform: translate(50%, -50%);
 	width: var(--ras-marca);
 	height: var(--ras-marca);
 	background: url("assets/logo.png") center / contain no-repeat;
+	mix-blend-mode: screen;
+	opacity: var(--ras-marca-opacidade);
 	pointer-events: none;
 	user-select: none;
 }
@@ -750,10 +758,8 @@ body::after,
 body::after {
 	position: fixed;
 	z-index: 0;
-	opacity: 0.14;
 }
 
-/* O overflow:hidden do banner e que faz o corte a direita. */
 .home .ras-banner {
 	z-index: 1;
 }
@@ -761,7 +767,6 @@ body::after {
 .ras-banner .ras-marca {
 	position: absolute;
 	z-index: 1;
-	opacity: 0.3;
 }
 
 @media (max-width: 781px) {
