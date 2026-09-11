@@ -44,9 +44,5 @@ $ras_v = wp_get_theme()->get( 'Version' );
 <figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/hero.jpg?v=$ras_v" ); ?>" alt="Barbeiro a fazer a barba a um cliente na Rides and Shaves"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-<!-- wp:html -->
-<img class="ras-marca" src="<?php echo esc_url( "$ras_uri/assets/logo.png?v=$ras_v" ); ?>" alt="" aria-hidden="true">
-<!-- /wp:html --></div>
+<!-- /wp:columns --></div>
 <!-- /wp:group -->
