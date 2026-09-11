@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 2.6.0
+Version: 2.6.1
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -724,8 +724,13 @@ header .wp-block-woocommerce-customer-account a:hover {
    mix-blend-mode: screen tira a mancha escura do desenho — com screen, preto
    nao pinta nada e so ficam as linhas claras. Sem isto a mota lia-se como um
    bloco pousado por cima da fotografia.
-   O PNG nao tem fundo (canal alfa recortado, verificado): o que parece fundo
-   sao os raios, o "HAIRCUT/SHAVE" e o "SINCE 1995" do proprio emblema.
+
+   Usa logo-marca.png e nao logo.png. O logo.png e transparente, mas os pixels
+   transparentes guardam o verde do fundo que foi recortado (RGB 4,57,56 com
+   alfa 0) e o screen pinta esse RGB na caixa toda — dava um retangulo verde
+   claro a volta do emblema. O logo-marca.png e o mesmo desenho com o RGB
+   pre-multiplicado pelo alfa: onde nao ha desenho fica preto, e preto sob
+   screen nao pinta nada. Gerado por tools/make-marca.py a partir do logo.png.
 
    ponytail: um ::after no body em vez de uma imagem em cada template — o URL
    relativo resolve a partir do style.css, por isso nao precisa de PHP.
@@ -747,7 +752,7 @@ body::after {
 	transform: translate(50%, -50%);
 	width: var(--ras-marca);
 	height: var(--ras-marca);
-	background: url("assets/logo.png") center / contain no-repeat;
+	background: url("assets/logo-marca.png") center / contain no-repeat;
 	mix-blend-mode: screen;
 	opacity: var(--ras-marca-opacidade);
 	pointer-events: none;
