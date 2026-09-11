@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 2.3.0
+Version: 2.4.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -717,36 +717,59 @@ header .wp-block-woocommerce-customer-account a:hover {
 
 
 /* --- Emblema como marca de agua ------------------------------------------- */
-/* Inteiro, encostado a direita e fixo ao ecra: acompanha o scroll em todas as
-   paginas em vez de viver so no banner.
+/* Cortado pela margem direita, so metade a vista, como na referencia.
+   Duas copias com a mesma geometria, por isso a transicao entre elas nao se ve:
+   - .ras-marca vive dentro do banner e e mais forte (0.3), porque ali esta por
+     cima de uma fotografia escura e a 0.14 desaparecia;
+   - body::after e fixa ao ecra e acompanha o scroll no resto do site.
+   O banner leva z-index 1 e tapa a copia fixa enquanto esta no ecra, senao
+   viam-se as duas ao mesmo tempo a afastarem-se uma da outra no scroll.
+
    ponytail: um ::after no body em vez de uma imagem em cada template — o URL
-   relativo resolve a partir do style.css, por isso nao precisa de PHP nem de
-   ser repetido nos patterns.
+   relativo resolve a partir do style.css, por isso nao precisa de PHP.
    z-index 0 poe a marca acima dos fundos das seccoes (que sao opacos, um valor
-   negativo escondia-a) e abaixo do cabecalho e do texto do banner, que estao
-   em camadas proprias. A opacidade e o unico numero a mexer: acima de ~0.2
-   comeca a competir com o texto das seccoes. */
-body::after {
+   negativo escondia-a) e abaixo do cabecalho. A opacidade e o unico numero a
+   mexer: acima de ~0.2 comeca a competir com o texto das seccoes. */
+:root {
+	--ras-marca: min(80vh, 760px);
+}
+
+body::after,
+.ras-banner .ras-marca {
 	content: "";
-	position: fixed;
-	z-index: 0;
 	top: 50%;
-	right: clamp(8px, 2.5vw, 56px);
-	transform: translateY(-50%);
-	width: min(34vw, 460px);
-	height: min(34vw, 460px);
+	right: 0;
+	transform: translate(40%, -50%);
+	width: var(--ras-marca);
+	height: var(--ras-marca);
 	background: url("assets/logo.png") center / contain no-repeat;
-	opacity: 0.14;
 	pointer-events: none;
 	user-select: none;
 }
 
+body::after {
+	position: fixed;
+	z-index: 0;
+	opacity: 0.14;
+}
+
+/* O overflow:hidden do banner e que faz o corte a direita. */
+.home .ras-banner {
+	z-index: 1;
+}
+
+.ras-banner .ras-marca {
+	position: absolute;
+	z-index: 1;
+	opacity: 0.3;
+}
+
 @media (max-width: 781px) {
-	/* No telemovel o texto ocupa a largura toda e passa por cima da marca. */
-	body::after {
-		width: min(70vw, 300px);
-		height: min(70vw, 300px);
-		opacity: 0.08;
+	/* Fora do telemovel: o conteudo ocupa a largura toda e a marca ficava por
+	   tras do texto dos cartoes. */
+	body::after,
+	.ras-banner .ras-marca {
+		display: none;
 	}
 }
 
