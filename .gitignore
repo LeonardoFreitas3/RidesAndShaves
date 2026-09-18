@@ -12,3 +12,8 @@ desktop.ini
 fotos-originais/*
 !fotos-originais/LEIA-ME.md
 !fotos-originais/prontas/
+
+# O testemunho comprimido (16 MB) e um ficheiro gerado: vive na Biblioteca de
+# Media do WordPress, nao no repositorio. Refaz-se com o ffmpeg a partir do
+# original, se preciso.
+fotos-originais/prontas/*.mp4

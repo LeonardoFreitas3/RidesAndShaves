@@ -19,8 +19,8 @@ DESTINO = RAIZ / "theme" / "rides-and-shaves" / "assets" / "img"
 
 # nome -> (largura, altura) do ficheiro que o tema carrega
 ALVOS = {
-    "hero": (2400, 1000),
-    "sobre": (900, 1000),
+    "hero": (2400, 1500),
+    "sobre": (900, 1200),
     "loja-nogueiro": (900, 560),
     "loja-lamacaes": (900, 560),
 }

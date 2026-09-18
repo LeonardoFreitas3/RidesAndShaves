@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.0.0
+Version: 3.1.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -157,17 +157,14 @@ Text Domain: rides-and-shaves
 }
 
 .ras-hero figure,
-.ras-hero img,
-.ras-hero .ras-video {
+.ras-hero img {
 	height: 100%;
 }
 
-.ras-hero img,
-.ras-hero .ras-video {
+.ras-hero img {
 	width: 100%;
 	min-height: 320px;
 	object-fit: cover;
-	display: block;
 }
 
 /* Vinheta para o texto respirar quando a foto for clara. */
@@ -568,6 +565,19 @@ header .wp-block-woocommerce-customer-account a:hover {
 	border-top-color: var(--wp--preset--color--gold);
 	background: color-mix(in srgb, var(--wp--preset--color--green-950) 70%, transparent);
 	color: var(--wp--preset--color--cream);
+}
+
+/* --- Filme da casa -------------------------------------------------------- */
+/* preload="none" no markup: sao 16 MB e ninguem os deve descarregar so por
+   passar pela pagina. Ate alguem carregar em play, o browser mostra o poster. */
+.ras-filme {
+	display: block;
+	width: 100%;
+	max-width: 960px;
+	margin-top: var(--wp--preset--spacing--30);
+	aspect-ratio: 3 / 2;
+	background: var(--wp--preset--color--green-900);
+	border: 1px solid var(--ras-line-soft);
 }
 
 /* --- Catalogo da loja ----------------------------------------------------- */
