@@ -8,6 +8,10 @@
 
 $ras_uri = get_stylesheet_directory_uri();
 
+// A versao do tema no URL da foto: o WordPress nao versiona src de imagens em
+// templates e o browser servia a foto antiga quando o ficheiro e substituido.
+$ras_v = wp_get_theme()->get( 'Version' );
+
 $ras_lojas = array(
 	array(
 		'nome'   => 'Nogueiró',
@@ -45,7 +49,7 @@ $ras_lojas = array(
 <?php foreach ( $ras_lojas as $loja ) : ?>
 <!-- wp:column {"className":"ras-place"} -->
 <div class="wp-block-column ras-place"><!-- wp:image -->
-<figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/{$loja['foto']}.jpg" ); ?>" alt="<?php echo esc_attr( "Rides and Shaves {$loja['nome']}" ); ?>"/></figure>
+<figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/{$loja['foto']}.jpg?v=$ras_v" ); ?>" alt="<?php echo esc_attr( "Rides and Shaves {$loja['nome']}" ); ?>"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"ras-place-body","layout":{"type":"constrained"}} -->
