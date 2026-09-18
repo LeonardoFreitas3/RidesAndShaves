@@ -201,3 +201,100 @@ add_action(
 	// /loja primeiro.
 	5
 );
+
+/**
+ * Poe as fotografias reais nos quatro produtos da loja.
+ *
+ * Trocar os ficheiros em assets/img nao chega: na importacao do CSV o
+ * WooCommerce copiou as imagens para a Biblioteca de Media e e a essa copia que
+ * cada produto aponta. Quem tem de mudar e o anexo do produto, nao o tema.
+ *
+ * Corre uma vez, no primeiro admin_init depois de instalar esta versao, e fica
+ * marcado numa option. Nao mexe em produtos onde ja tenhas posto uma imagem
+ * tua: so substitui se a atual ainda for uma das minhas (nome produto-N).
+ *
+ * Os titulos vao junto porque as fotos sao dos produtos reais e os nomes que eu
+ * tinha inventado a partir do mockup contradiziam os rotulos — um frasco de
+ * STYLING POWDER debaixo de "Champo para Barba" e um erro a vista do cliente.
+ * Os precos ficam como estao: esses so tu os sabes.
+ *
+ * ponytail: uma option com a versao em vez de uma tabela de migracoes. Quando
+ * esta rotina deixar de ser precisa, apaga-se a funcao e a option.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		$ras_marca = 'fotos-3.2';
+
+		if ( get_option( 'ras_produtos' ) === $ras_marca || ! function_exists( 'wc_get_product_id_by_sku' ) ) {
+			return;
+		}
+
+		// Marcar antes de trabalhar: se alguma coisa rebentar a meio, nao fica a
+		// tentar outra vez em cada pedido do backoffice.
+		update_option( 'ras_produtos', $ras_marca );
+
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+
+		$ras_mapa = array(
+			'RS-POM-100' => array( 'produto-1', 'Pomada Matte' ),
+			'RS-OLE-30'  => array( 'produto-2', 'Bálsamo para Barba' ),
+			'RS-CHA-200' => array( 'produto-3', 'Pó Texturizador' ),
+			'RS-KIT-01'  => array( 'produto-4', 'Pomada' ),
+		);
+
+		foreach ( $ras_mapa as $ras_sku => list( $ras_ficheiro, $ras_titulo ) ) {
+			$ras_id = wc_get_product_id_by_sku( $ras_sku );
+			if ( ! $ras_id ) {
+				continue;
+			}
+
+			$ras_atual = get_post_thumbnail_id( $ras_id );
+			if ( $ras_atual ) {
+				$ras_nome = basename( get_attached_file( $ras_atual ) );
+				// Imagem posta por ti: fica como esta.
+				if ( 0 !== strpos( $ras_nome, 'produto-' ) ) {
+					continue;
+				}
+			}
+
+			$ras_origem = get_stylesheet_directory() . "/assets/img/$ras_ficheiro.jpg";
+			if ( ! file_exists( $ras_origem ) ) {
+				continue;
+			}
+
+			$ras_carregado = wp_upload_bits(
+				"$ras_ficheiro-" . wp_get_theme()->get( 'Version' ) . '.jpg',
+				null,
+				file_get_contents( $ras_origem ) // phpcs:ignore WordPress.WP.AlternativeFunctions
+			);
+			if ( ! empty( $ras_carregado['error'] ) ) {
+				continue;
+			}
+
+			$ras_anexo = wp_insert_attachment(
+				array(
+					'post_mime_type' => 'image/jpeg',
+					'post_title'     => $ras_titulo,
+					'post_status'    => 'inherit',
+				),
+				$ras_carregado['file'],
+				$ras_id
+			);
+
+			if ( is_wp_error( $ras_anexo ) ) {
+				continue;
+			}
+
+			wp_update_attachment_metadata( $ras_anexo, wp_generate_attachment_metadata( $ras_anexo, $ras_carregado['file'] ) );
+			set_post_thumbnail( $ras_id, $ras_anexo );
+
+			wp_update_post(
+				array(
+					'ID'         => $ras_id,
+					'post_title' => $ras_titulo,
+				)
+			);
+		}
+	}
+);

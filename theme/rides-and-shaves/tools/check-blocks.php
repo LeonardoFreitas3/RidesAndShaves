@@ -111,6 +111,25 @@ foreach ( array( 'style.css', 'theme.json', 'templates/front-page.html', 'assets
 	}
 }
 
+/* --- os SKUs da rotina das fotos tem de bater certo com o CSV --- */
+/* Se divergirem, a rotina nao encontra os produtos e uma reimportacao do CSV
+   cria produtos novos em vez de atualizar os que existem. */
+$csv = dirname( $root, 2 ) . '/dist/produtos.csv';
+if ( file_exists( $csv ) ) {
+	$linhas = array_slice( file( $csv, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES ), 1 );
+	$no_csv = array_filter( array_map( fn( $l ) => str_getcsv( $l )[2] ?? '', $linhas ) );
+
+	preg_match_all( "/'(RS-[A-Z0-9-]+)'\s*=>/", file_get_contents( "$root/functions.php" ), $m );
+	$no_php = $m[1];
+
+	foreach ( array_diff( $no_php, $no_csv ) as $orfao ) {
+		$errors[] = "SKU \"$orfao\" esta no functions.php mas nao no dist/produtos.csv";
+	}
+	foreach ( array_diff( $no_csv, $no_php ) as $orfao ) {
+		$errors[] = "SKU \"$orfao\" esta no dist/produtos.csv mas nao no functions.php";
+	}
+}
+
 if ( $errors ) {
 	echo "FALHOU\n" . implode( "\n", array_map( fn( $e ) => "  - $e", $errors ) ) . "\n";
 	exit( 1 );
