@@ -4,3 +4,11 @@ _preview-*.html
 # Ficheiros de sistema
 Thumbs.db
 desktop.ini
+
+# Os originais das fotos e dos videos ficam so na maquina. O testemunho sozinho
+# tem 1,4 GB e o GitHub recusa ficheiros acima de 100 MB — e mesmo que aceitasse,
+# ficariam no historico para sempre. O que o site usa esta em
+# theme/rides-and-shaves/assets/, ja tratado e comprimido.
+fotos-originais/*
+!fotos-originais/LEIA-ME.md
+!fotos-originais/prontas/

@@ -3,7 +3,7 @@
  * Title: Mais do que uma barbearia
  * Slug: rides-and-shaves/sobre
  * Categories: rides-and-shaves
- * Description: Foto à esquerda, texto à direita.
+ * Description: Vídeo em loop à esquerda, texto à direita.
  */
 
 $ras_uri = get_stylesheet_directory_uri();
@@ -15,9 +15,26 @@ $ras_v = wp_get_theme()->get( 'Version' );
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"}},"backgroundColor":"green-900","layout":{"type":"constrained","wideSize":"1600px"}} -->
 <div class="wp-block-group alignfull has-green-900-background-color has-background" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:columns {"verticalAlignment":"center","align":"full","style":{"spacing":{"blockGap":{"top":"0","left":"0"},"margin":{"top":"0","bottom":"0"}}}} -->
 <div class="wp-block-columns alignfull are-vertically-aligned-center" style="margin-top:0;margin-bottom:0"><!-- wp:column {"verticalAlignment":"center","width":"38%","className":"ras-hero"} -->
-<div class="wp-block-column is-vertically-aligned-center ras-hero" style="flex-basis:38%"><!-- wp:image -->
-<figure class="wp-block-image"><img src="<?php echo esc_url( "$ras_uri/assets/img/sobre.jpg?v=$ras_v" ); ?>" alt="Depósito de mota com o emblema Rides and Shaves"/></figure>
-<!-- /wp:image --></div>
+<div class="wp-block-column is-vertically-aligned-center ras-hero" style="flex-basis:38%"><!-- wp:html -->
+<video class="ras-video"
+       poster="<?php echo esc_url( "$ras_uri/assets/img/sobre.jpg?v=$ras_v" ); ?>"
+       src="<?php echo esc_url( "$ras_uri/assets/video/barbearia.mp4?v=$ras_v" ); ?>"
+       autoplay muted loop playsinline preload="metadata"
+       aria-label="Barbeiro a finalizar um corte na Rides and Shaves"></video>
+<script>
+// Sem som, em loop e sem controlos: e decoracao, nao e conteudo. Quem pediu
+// menos movimento nas definicoes do sistema fica com a imagem de poster.
+( function () {
+	var v = document.currentScript.previousElementSibling;
+	if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+		v.autoplay = false;
+		v.pause();
+		v.removeAttribute( 'src' );
+		v.load();
+	}
+}() );
+</script>
+<!-- /wp:html --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"center","width":"62%","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}}} -->

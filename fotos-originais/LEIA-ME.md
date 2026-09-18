@@ -1,39 +1,21 @@
-# Fotos originais
 
-Larga aqui as fotos no tamanho e qualidade máximos que tiveres. O nome do
-ficheiro é que decide onde entra — a extensão pode ser `.jpg`, `.jpeg`, `.png`
-ou `.webp`.
+---
 
-Depois corre:
+## Estado em 18/09/2026
 
-    python tools/fotos.py
+Já usadas do lote que entregaste:
 
-O script recorta ao centro para o formato certo, redimensiona e grava em
-`theme/rides-and-shaves/assets/img/`. Os originais ficam aqui intactos.
+- `corte-barba2.JPG` → banner da homepage (`hero.jpg`, recorte 16:9 a 42% da altura)
+- `02.MP4` → vídeo em loop na secção "Mais do que uma barbearia"
+  (`assets/video/barbearia.mp4`, 720×1280, sem som, 247 KB) + poster `sobre.jpg`
 
-## Os ficheiros que o site usa
+Prontas para carregares no WooCommerce, em `fotos-originais/prontas/`:
 
-| Nome a dar          | Onde aparece                          | Formato   | Mínimo recomendado |
-|---------------------|---------------------------------------|-----------|--------------------|
-| `hero`              | Banner da homepage, ecrã inteiro      | 2,4:1     | 2400 × 1000        |
-| `sobre`             | "Mais do que uma barbearia"           | 0,9:1     | 900 × 1000         |
-| `loja-nogueiro`     | Cartão da loja do Nogueiró            | 1,6:1     | 900 × 560          |
-| `loja-lamacaes`     | Cartão da loja das Lamaçães           | 1,6:1     | 900 × 560          |
+- `beard-balm.jpg`, `styling-powder.jpg`, `matte-pomade.jpg`, `pomade.jpg`
+  (1200×1200, produto inteiro sobre o fundo da própria foto)
 
-Não é preciso entregares tudo de uma vez: o script só mexe no que encontrar.
+Ainda por usar: `03.MP4`, `corte-barba.JPG`, `corte-barba3.JPG`, `cabelo*.jpeg`,
+`corte.jpeg`, e o filme `03 Testemunho Nuno 2.MP4`.
 
-## O que fica bem em cada uma
-
-- **hero** — horizontal, com espaço morto à esquerda. O título "Enjoy the ride"
-  assenta em cima do terço esquerdo, por isso uma foto com a acção à direita
-  funciona melhor do que uma com o assunto ao centro.
-- **sobre** — vertical. Interior, cadeiras, as motas.
-- **loja-*** — a fachada ou o interior de cada loja, uma por loja.
-
-## As fotos dos produtos não vêm por aqui
-
-Essas são do WooCommerce, não do tema. Carrega-as em
-**Produtos → editar produto → Imagem do produto**. Assim mudam-se sem ter de
-enviar o tema outra vez, e o WordPress gera os tamanhos todos sozinho.
-
-Formato: quadrado, mínimo 800 × 800, fundo liso.
+Continua a faltar: **uma foto de cada loja** (fachada ou interior do Nogueiró e
+das Lamaçães). Os cartões da página Lojas ainda usam as imagens geradas.
