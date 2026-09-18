@@ -5,27 +5,29 @@
  * Categories: rides-and-shaves
  * Description: O filme da casa, com play manual.
  *
- * O ficheiro nao viaja no tema: sao 16 MB e ficariam em cada zip que se envia,
- * para o servidor guardar a mesma coisa vezes sem conta. Vive na Biblioteca de
- * Media e esta seccao vai la buscá-lo pelo slug.
+ * O ficheiro vem no tema, em assets/video, para a seccao funcionar mal se
+ * instale, sem mais nenhum passo.
  *
- * Carregar em Media -> Adicionar novo o ficheiro com o nome testemunho.mp4. O
- * WordPress da-lhe o slug "testemunho" e a seccao aparece sozinha. Enquanto nao
- * existir, nao se imprime nada — a pagina nao fica com um buraco nem um erro.
+ * Se um dia o quiseres fora do tema — para o zip voltar a ser leve, ou para
+ * trocar o filme sem me pedires nada —, carrega-o em Media -> Adicionar novo
+ * com o nome testemunho.mp4. O WordPress da-lhe o slug "testemunho", esta
+ * seccao passa a preferir esse e o ficheiro do tema deixa de ser usado.
  *
- * ponytail: procurar pelo slug em vez de guardar um ID numa option. Sem ecra de
- * definicoes, sem constante para editar a mao, sem nada para configurar.
+ * ponytail: a Biblioteca de Media primeiro, o tema como recurso. Duas linhas,
+ * e nao ha nada para configurar em nenhum dos casos.
  */
 
 $ras_uri   = get_stylesheet_directory_uri();
 $ras_v     = wp_get_theme()->get( 'Version' );
 $ras_video = get_page_by_path( 'testemunho', OBJECT, 'attachment' );
+$ras_src   = $ras_video ? wp_get_attachment_url( $ras_video->ID ) : '';
 
-if ( ! $ras_video ) {
-	return;
+if ( ! $ras_src ) {
+	$ras_src = file_exists( get_stylesheet_directory() . '/assets/video/testemunho.mp4' )
+		? "$ras_uri/assets/video/testemunho.mp4?v=$ras_v"
+		: '';
 }
 
-$ras_src = wp_get_attachment_url( $ras_video->ID );
 if ( ! $ras_src ) {
 	return;
 }
