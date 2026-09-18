@@ -224,7 +224,7 @@ add_action(
 add_action(
 	'admin_init',
 	static function () {
-		$ras_marca = 'fotos-3.2';
+		$ras_marca = 'fotos-3.4';
 
 		if ( get_option( 'ras_produtos' ) === $ras_marca || ! function_exists( 'wc_get_product_id_by_sku' ) ) {
 			return;
@@ -296,5 +296,24 @@ add_action(
 				)
 			);
 		}
+	}
+);
+
+/**
+ * O WooCommerce deixa de aparar as fotos de produto.
+ *
+ * Por omissao o tamanho "thumbnail" do catalogo e cortado a 1:1: uma foto
+ * vertical perdia o topo e o fundo. Com crop a 0, cada tamanho e gerado na
+ * proporcao original e nada se perde.
+ *
+ * ponytail: um filtro em vez de pedir para mexer em Personalizar -> WooCommerce
+ * -> Imagens de produto. Assim vale para quem instalar o tema, sem instrucoes.
+ */
+add_filter(
+	'woocommerce_get_image_size_thumbnail',
+	static function ( $tamanho ) {
+		$tamanho['height'] = '';
+		$tamanho['crop']   = 0;
+		return $tamanho;
 	}
 );

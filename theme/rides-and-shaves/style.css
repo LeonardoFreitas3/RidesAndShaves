@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.3.0
+Version: 3.4.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -266,7 +266,9 @@ Text Domain: rides-and-shaves
 	display: block;
 	width: 100%;
 	height: auto;
-	aspect-ratio: 1;
+	/* O formato das fotografias dos produtos. A caixa acompanha-o para os
+	   cartoes ficarem todos a mesma altura sem aparar nem deixar barras. */
+	aspect-ratio: 2 / 3;
 	object-fit: contain;
 }
 
