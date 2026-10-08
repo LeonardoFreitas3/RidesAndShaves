@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.7.0
+Version: 3.8.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -1226,4 +1226,137 @@ input[type="checkbox"] {
 	.wp-block-navigation a {
 		transition: color 0.3s;
 	}
+}
+
+/* --- Carrinho e checkout (blocos do WooCommerce) --------------------------- */
+/* Os blocos do Woo trazem campos brancos com a etiqueta a flutuar por cima na
+   cor do texto da pagina — cream sobre branco, nao se lia nada. Os campos
+   passam a ser como os da conta: transparentes, filete fino, etiqueta visivel.
+
+   ponytail: so CSS, como nas paginas de conta. O cabecalho do checkout e o
+   parts/checkout-header.html, que o Woo usa em vez do dele quando existe no
+   tema. */
+.wc-block-components-text-input input:is([type="text"], [type="email"], [type="tel"], [type="url"], [type="number"]),
+.wc-block-components-combobox .wc-block-components-combobox-control input.components-combobox-control__input,
+.wc-block-components-textarea,
+.wc-block-components-totals-coupon__input input {
+	background-color: transparent;
+	border: 1px solid var(--ras-line-soft);
+	border-radius: 0;
+	color: var(--wp--preset--color--cream);
+}
+
+.wc-block-components-text-input input:focus,
+.wc-block-components-combobox .wc-block-components-combobox-control input.components-combobox-control__input:focus,
+.wc-block-components-textarea:focus {
+	border-color: var(--wp--preset--color--gold);
+	box-shadow: none;
+}
+
+.wc-block-components-text-input label,
+.wc-block-components-combobox .wc-block-components-combobox-control label,
+.wc-block-components-select .wc-block-components-select__label {
+	color: color-mix(in srgb, var(--wp--preset--color--cream) 72%, transparent);
+}
+
+.wc-block-components-text-input.is-active label,
+.wc-block-components-combobox.is-active label {
+	color: var(--wp--preset--color--gold);
+}
+
+/* Seta do pais e do select, que vinha a preto. */
+.wc-block-components-combobox .wc-block-components-combobox-control svg,
+.wc-block-components-select .wc-block-components-select__expand {
+	fill: var(--wp--preset--color--cream);
+}
+
+/* Autofill do browser pintava o campo de branco. */
+.wc-block-components-text-input input:-webkit-autofill,
+.wc-block-components-combobox input:-webkit-autofill {
+	-webkit-text-fill-color: var(--wp--preset--color--cream);
+	box-shadow: 0 0 0 100px var(--wp--preset--color--green-800) inset;
+}
+
+/* Lista do pais aberta: fundo escuro em vez de branco com texto cream. */
+.wc-block-components-combobox .components-form-token-field__suggestions-list,
+.wc-block-components-combobox .components-combobox-control__suggestions-container {
+	background: var(--wp--preset--color--green-950);
+	border-color: var(--ras-line);
+	color: var(--wp--preset--color--cream);
+}
+
+.wc-block-components-combobox .components-form-token-field__suggestion.is-selected {
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--green-900);
+}
+
+/* Botao de finalizar e de ir para o checkout na cor da marca. */
+.wc-block-components-button:not(.is-link) {
+	background-color: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--green-900);
+	border: 0;
+	border-radius: 2px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.8125rem;
+}
+
+.wc-block-components-button:not(.is-link):hover,
+.wc-block-components-button:not(.is-link):focus {
+	background-color: var(--wp--preset--color--cream);
+	color: var(--wp--preset--color--green-900);
+}
+
+.wc-block-components-totals-coupon__button {
+	background-color: transparent !important;
+	color: var(--wp--preset--color--gold) !important;
+	border: 1px solid var(--wp--preset--color--gold) !important;
+}
+
+/* Filetes do resumo e das linhas na cor da marca em vez de cinzento. */
+.wc-block-components-sidebar .wc-block-components-panel,
+.wc-block-components-sidebar .wc-block-components-totals-wrapper,
+.wc-block-components-sidebar .wc-block-components-order-summary,
+.wc-block-components-checkout-order-summary__title,
+.wc-block-cart-items th,
+.wc-block-cart-items td,
+.wc-block-components-order-summary-item,
+.wc-block-checkout__sidebar.is-large {
+	border-color: var(--ras-line-soft);
+}
+
+.wc-block-checkout__sidebar.is-large .wc-block-components-sidebar,
+.wc-block-checkout__sidebar.is-large {
+	border-color: var(--ras-line);
+}
+
+/* Caixas de selecao e radios: fundo a condizer. */
+.wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"],
+.wc-block-components-radio-control__input {
+	background-color: transparent;
+	border-color: var(--ras-line);
+}
+
+.wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]:checked {
+	background-color: var(--wp--preset--color--gold);
+	border-color: var(--wp--preset--color--gold);
+}
+
+.wc-block-components-checkbox .wc-block-components-checkbox__mark {
+	color: var(--wp--preset--color--green-900);
+}
+
+.wc-block-components-radio-control__input:checked {
+	border-color: var(--wp--preset--color--gold);
+}
+
+.wc-block-components-radio-control__input:checked::before {
+	background: var(--wp--preset--color--gold);
+}
+
+/* A marca de agua ficava por cima do resumo da encomenda. */
+body.woocommerce-checkout::after,
+body.woocommerce-cart::after {
+	display: none;
 }
