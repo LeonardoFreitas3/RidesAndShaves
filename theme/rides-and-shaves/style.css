@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.8.0
+Version: 3.9.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -1233,35 +1233,40 @@ input[type="checkbox"] {
    cor do texto da pagina — cream sobre branco, nao se lia nada. Os campos
    passam a ser como os da conta: transparentes, filete fino, etiqueta visivel.
 
+   !important e mesmo preciso: a folha dos blocos do Woo e injetada depois da
+   do tema, com a mesma especificidade, e ganhava pela ordem. Visto no site:
+   sem isto os campos continuavam brancos.
+
    ponytail: so CSS, como nas paginas de conta. O cabecalho do checkout e o
-   parts/checkout-header.html, que o Woo usa em vez do dele quando existe no
-   tema. */
+   parts/checkout-header.html, chamado pelo templates/page-checkout.html do
+   tema — o template do Woo prende a parte dele com "theme":"woocommerce",
+   por isso so trocar a parte nao chegava. */
 .wc-block-components-text-input input:is([type="text"], [type="email"], [type="tel"], [type="url"], [type="number"]),
 .wc-block-components-combobox .wc-block-components-combobox-control input.components-combobox-control__input,
 .wc-block-components-textarea,
 .wc-block-components-totals-coupon__input input {
-	background-color: transparent;
-	border: 1px solid var(--ras-line-soft);
-	border-radius: 0;
-	color: var(--wp--preset--color--cream);
+	background-color: transparent !important;
+	border: 1px solid var(--ras-line-soft) !important;
+	border-radius: 0 !important;
+	color: var(--wp--preset--color--cream) !important;
 }
 
 .wc-block-components-text-input input:focus,
 .wc-block-components-combobox .wc-block-components-combobox-control input.components-combobox-control__input:focus,
 .wc-block-components-textarea:focus {
-	border-color: var(--wp--preset--color--gold);
-	box-shadow: none;
+	border-color: var(--wp--preset--color--gold) !important;
+	box-shadow: none !important;
 }
 
 .wc-block-components-text-input label,
 .wc-block-components-combobox .wc-block-components-combobox-control label,
 .wc-block-components-select .wc-block-components-select__label {
-	color: color-mix(in srgb, var(--wp--preset--color--cream) 72%, transparent);
+	color: color-mix(in srgb, var(--wp--preset--color--cream) 72%, transparent) !important;
 }
 
 .wc-block-components-text-input.is-active label,
 .wc-block-components-combobox.is-active label {
-	color: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--gold) !important;
 }
 
 /* Seta do pais e do select, que vinha a preto. */
