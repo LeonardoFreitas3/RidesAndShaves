@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.5.0
+Version: 3.6.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -59,63 +59,67 @@ Text Domain: rides-and-shaves
 	flex: 0 0 2.5rem;
 }
 
-/* --- Grelha de servicos: uma caixa, divisorias internas ------------------- */
-/* ponytail: as divisorias sao um border-left no irmao, nao 6 elementos <hr>. */
-.ras-services {
-	border: 1px solid var(--ras-line);
+/* --- Carta de servicos: numero, nome, preco a direita --------------------- */
+/* ponytail: as divisorias sao um border-bottom em cada linha, nao <hr>. */
+.ras-menu {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: var(--wp--preset--spacing--60);
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.ras-services > .wp-block-columns {
-	margin-block: 0;
-	gap: 0;
-	/* Colunas a esticar para os botoes assentarem na mesma linha. Explicito
-	   para nao depender do default do tema pai. */
-	align-items: stretch;
+.ras-servico {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: baseline;
+	column-gap: var(--wp--preset--spacing--30);
+	padding-block: var(--wp--preset--spacing--30);
+	border-bottom: 1px solid var(--ras-line-soft);
 }
 
-/* Coluna em flex para os botoes assentarem todos na mesma linha de base,
-   independentemente do comprimento da descricao. */
-.ras-service {
-	display: flex;
-	flex-direction: column;
-	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--20);
-	text-align: center;
+.ras-servico-n {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 0.8125rem;
+	letter-spacing: 0.2em;
+	color: var(--wp--preset--color--gold);
+	transition: color 0.4s;
 }
 
-.ras-service h3 {
-	min-height: 2.3em;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.ras-servico-txt h3 {
+	margin: 0 0 0.3rem;
+	font-size: var(--wp--preset--font-size--large);
+	letter-spacing: 0.02em;
+	transition: translate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.ras-service .wp-block-buttons {
-	margin-top: auto;
-	justify-content: center;
+.ras-servico-txt p {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	color: color-mix(in srgb, var(--wp--preset--color--cream) 70%, transparent);
 }
 
-.ras-service + .ras-service {
-	border-left: 1px solid var(--ras-line-soft);
+.ras-servico-preco {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: var(--wp--preset--font-size--x-large);
+	font-weight: 700;
+	line-height: 1;
+	white-space: nowrap;
 }
 
-/* Empilhado em mobile a divisoria tem de virar horizontal, senao fica solta. */
+.ras-servico:hover .ras-servico-n {
+	color: var(--wp--preset--color--cream);
+}
+
+.ras-servico:hover .ras-servico-txt h3 {
+	translate: 6px 0;
+}
+
 @media (max-width: 781px) {
-	.ras-service + .ras-service {
-		border-left: 0;
-		border-top: 1px solid var(--ras-line-soft);
+	.ras-menu {
+		grid-template-columns: 1fr;
 	}
-}
-
-.ras-service img {
-	width: 44px;
-	height: 44px;
-	margin-inline: auto;
-}
-
-/* Botao pequeno dentro de cada servico. */
-.ras-service .wp-block-button__link {
-	padding: 0.6em 1.4em;
-	font-size: 0.75rem;
 }
 
 /* --- Preco --------------------------------------------------------------- */
@@ -447,13 +451,6 @@ main.wp-block-group {
 
 main.wp-block-group > * {
 	margin-block: 0;
-}
-
-/* A grelha de servicos estava presa a largura de conteudo (820px) dentro de uma
-   caixa de 1280, o que deixava um vazio grande dos dois lados dentro da moldura. */
-.ras-services > .wp-block-columns {
-	max-width: none;
-	margin-inline: 0;
 }
 
 /* --- Cluster de accoes do cabecalho --------------------------------------- */
@@ -844,25 +841,6 @@ body::after {
 	header .wp-block-button.is-icon-cal > .wp-block-button__link::before {
 		margin-right: 0.4em;
 	}
-
-	/* Empilhados, os cartoes de servico esticavam todos a altura do mais alto e
-	   o margin-top:auto do botao abria buracos no meio. Cada um passa a medir o
-	   seu conteudo. */
-	.ras-services > .wp-block-columns {
-		align-items: normal;
-	}
-
-	.ras-service {
-		padding-block: var(--wp--preset--spacing--30);
-	}
-
-	.ras-service h3 {
-		min-height: 0;
-	}
-
-	.ras-service .wp-block-buttons {
-		margin-top: var(--wp--preset--spacing--20);
-	}
 }
 
 /* --- Conta: iniciar sessao e registo -------------------------------------- */
@@ -1088,5 +1066,134 @@ input[type="checkbox"] {
 	.woocommerce-account .woocommerce form.woocommerce-form-login,
 	.woocommerce-account .woocommerce form.woocommerce-form-register {
 		padding: var(--wp--preset--spacing--30);
+	}
+}
+
+/* --- Movimento ------------------------------------------------------------ */
+/* Tres coisas: o banner entra ao carregar, o resto entra ao scrollar, e o que
+   e clicavel responde ao rato. Tudo CSS; o assets/js/motion.js so poe a classe
+   is-in quando o elemento entra no ecra.
+
+   A lista de seletores e a mesma do motion.js. Esta aqui e nao numa classe
+   posta pelo script porque o script corre no DOMContentLoaded, depois do
+   primeiro paint: com a classe a chegar tarde via-se tudo e logo a seguir
+   desaparecia para entrar outra vez. Com ras-js no <html> desde o inicio, a
+   regra ja esta em vigor no primeiro paint.
+
+   Fica tudo dentro de prefers-reduced-motion: no-preference — quem pediu menos
+   movimento ve o site parado e inteiro, sem passar pelo opacity:0. */
+@media (prefers-reduced-motion: no-preference) {
+	:root {
+		--ras-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	/* Entrada ao scrollar. */
+	.ras-js :is(main h2, .ras-servico, .ras-place, .ras-produto, .ras-card, .ras-filme, .ras-menu + .wp-block-buttons) {
+		opacity: 0;
+		translate: 0 28px;
+		transition:
+			opacity 0.9s var(--ras-ease),
+			translate 0.9s var(--ras-ease);
+		transition-delay: calc(var(--ras-i, 0) * 90ms);
+	}
+
+	.ras-js :is(main h2, .ras-servico, .ras-place, .ras-produto, .ras-card, .ras-filme, .ras-menu + .wp-block-buttons).is-in {
+		opacity: 1;
+		translate: 0 0;
+	}
+
+	/* O filete do titulo desenha-se da esquerda para a direita, depois do texto. */
+	.ras-js .ras-rule::after {
+		transform-origin: left;
+		scale: 0 1;
+		transition: scale 1.2s var(--ras-ease) 0.3s;
+	}
+
+	.ras-js .ras-rule.is-in::after {
+		scale: 1 1;
+	}
+
+	/* O banner da homepage: texto a subir em cascata, foto a assentar devagar. */
+	@keyframes ras-sobe {
+		from {
+			opacity: 0;
+			translate: 0 32px;
+		}
+	}
+
+	@keyframes ras-assenta {
+		from {
+			scale: 1.08;
+		}
+	}
+
+	.home .ras-hero-texto > * {
+		animation: ras-sobe 1s var(--ras-ease) both;
+	}
+
+	.home .ras-hero-texto > :nth-child(2) {
+		animation-delay: 0.15s;
+	}
+
+	.home .ras-hero-texto > :nth-child(3) {
+		animation-delay: 0.3s;
+	}
+
+	.home .ras-hero-texto > :nth-child(4) {
+		animation-delay: 0.45s;
+	}
+
+	.home .ras-banner .ras-hero img {
+		animation: ras-assenta 6s var(--ras-ease) both;
+	}
+
+	/* Resposta ao rato. */
+	.wp-block-button__link,
+	.wp-element-button,
+	.woocommerce a.button,
+	.woocommerce button.button {
+		transition:
+			translate 0.35s var(--ras-ease),
+			box-shadow 0.35s var(--ras-ease),
+			background-color 0.35s,
+			color 0.35s;
+	}
+
+	.wp-block-button__link:hover,
+	.wp-element-button:hover,
+	.woocommerce a.button:hover,
+	.woocommerce button.button:hover {
+		translate: 0 -2px;
+		box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--wp--preset--color--gold) 70%, transparent);
+	}
+
+	.ras-place,
+	.ras-produto,
+	.ras-card {
+		transition:
+			translate 0.5s var(--ras-ease),
+			border-color 0.5s,
+			opacity 0.9s var(--ras-ease);
+	}
+
+	.ras-place:hover,
+	.ras-produto:hover,
+	.ras-card:hover {
+		translate: 0 -4px;
+		border-color: var(--ras-line);
+	}
+
+	.ras-place img,
+	.ras-produto img {
+		transition: scale 1s var(--ras-ease);
+	}
+
+	.ras-place:hover img,
+	.ras-produto:hover img {
+		scale: 1.04;
+	}
+
+	.wp-block-navigation a {
+		transition: color 0.3s;
 	}
 }

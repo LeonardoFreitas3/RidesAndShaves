@@ -26,6 +26,15 @@ add_action(
 			array(),
 			wp_get_theme()->get( 'Version' )
 		);
+
+		// No <head> e sem defer, de proposito: ver o comentario no ficheiro.
+		wp_enqueue_script(
+			'rides-and-shaves-motion',
+			get_stylesheet_directory_uri() . '/assets/js/motion.js',
+			array(),
+			wp_get_theme()->get( 'Version' ),
+			false
+		);
 	}
 );
 

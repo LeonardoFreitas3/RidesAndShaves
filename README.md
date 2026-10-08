@@ -11,7 +11,8 @@ theme/rides-and-shaves/   o tema
   style.css               só o que o theme.json não cobre
   functions.php           enqueue, suporte Woo, redirect /marcar
   assets/logo.png         emblema
-  assets/icons/*.svg      6 ícones de serviço, dourado, line art
+  assets/icons/*.svg      ícones dos botões e contactos, dourado, line art
+  assets/js/motion.js     entrada por scroll (15 linhas, sem biblioteca)
   assets/img/*.jpg        placeholders de fotografia
   screenshot.png          cartão do tema em Aparência → Temas
   parts/                  header (com menu), footer
@@ -42,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File tools\import-fotos.ps1
 | `produto-1.jpg` | boião de pomada, já com o logótipo | 700×700 |
 | `produto-2..4.jpg` | recortados da foto dos três produtos | 700×700 |
 
-Os ícones dos serviços (`assets/icons/`) são SVG desenhados de raiz, na cor da marca.
+Os ícones (`assets/icons/`) são SVG desenhados de raiz, na cor da marca.
 O emblema sem fundo sai de `tools/make-transparent-logo.ps1`.
 
 ## Ver o design sem instalar o WordPress

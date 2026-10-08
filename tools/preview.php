@@ -34,6 +34,16 @@ function wc_get_product( $id = 0 ) {
 	return null;
 }
 function ras_cartao_produto( $p ) {}
+define( 'OBJECT', 'OBJECT' );
+function get_page_by_path( $slug, $o = null, $t = 'page' ) {
+	return null;
+}
+function wp_get_attachment_url( $id ) {
+	return '';
+}
+function get_stylesheet_directory() {
+	return __DIR__ . '/../theme/rides-and-shaves';
+}
 function wp_get_theme() {
 	return new class() {
 		public function get( $k ) {
@@ -220,6 +230,7 @@ foreach ( $templates as $t ) {
 		. "
 .ras-nav a{margin-right:1rem;text-transform:uppercase;letter-spacing:.08em}"
 		. STYLE_CLOSE
+		. "<script src='theme/rides-and-shaves/assets/js/motion.js'></script>"
 		. "<body class='" . ( 'front-page' === $slug ? 'home' : '' ) . "'>"
 		. "<div class='ras-nav'>$nav</div>" . $body . "</body>";
 
