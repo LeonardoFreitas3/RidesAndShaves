@@ -12,6 +12,9 @@ $ras_uri = get_stylesheet_directory_uri();
 // templates e o browser servia a foto antiga quando o ficheiro e substituido.
 $ras_v = wp_get_theme()->get( 'Version' );
 
+// 'google' e o place ID da ficha no Google Maps. Com ele o "Ver no mapa" abre a
+// ficha da loja (fotos, horario, avaliacoes) em vez de um pino solto nas
+// coordenadas. Os mesmos IDs estao no pattern das reviews.
 $ras_lojas = array(
 	array(
 		'nome'   => 'Nogueiró',
@@ -19,6 +22,7 @@ $ras_lojas = array(
 		'morada' => 'Rua Amândio César, N.º 7',
 		'cp'     => '4715-404 Braga',
 		'geo'    => '41.5514457,-8.3959997',
+		'google' => 'ChIJUYwWsrX9JA0RaWsRVBE0GzA',
 	),
 	array(
 		'nome'   => 'Lamaçães',
@@ -26,6 +30,7 @@ $ras_lojas = array(
 		'morada' => 'Rua Ambrósio dos Santos, N.º 57',
 		'cp'     => '4715-213 Braga',
 		'geo'    => '41.5451116,-8.4015592',
+		'google' => 'ChIJN59vt4D_JA0RBFbUwmY0HOk',
 	),
 );
 ?>
@@ -67,7 +72,7 @@ $ras_lojas = array(
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline is-icon-pin"} -->
-<div class="wp-block-button is-style-outline is-icon-pin"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( 'https://www.google.com/maps/search/?api=1&query=' . $loja['geo'] ); ?>" target="_blank" rel="noreferrer noopener">Ver no mapa</a></div>
+<div class="wp-block-button is-style-outline is-icon-pin"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( 'https://www.google.com/maps/place/?q=place_id:' . $loja['google'] ); ?>" target="_blank" rel="noreferrer noopener">Ver no mapa</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-icon-cal"} -->

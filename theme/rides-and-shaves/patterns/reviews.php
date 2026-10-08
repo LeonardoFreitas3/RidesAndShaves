@@ -3,12 +3,22 @@
  * Title: Reviews
  * Slug: rides-and-shaves/reviews
  * Categories: rides-and-shaves
- * Description: Nota do Google e quatro críticas reais.
+ * Description: Nota do Google por loja, com link para as avaliações, e quatro críticas reais.
  *
  * ponytail: sem fotografias de rosto. Estas são pessoas reais que escreveram as
  * críticas no Google — um retrato inventado ao lado do nome de alguém real é
  * passar por verdadeiro o que não é. Círculo dourado com a inicial resolve.
  */
+
+// Place ID de cada ficha no Google (os mesmos do pattern das lojas). O link
+// search.google.com/local/reviews abre a lista de avaliacoes dessa ficha, por
+// isso quem quiser confirmar as criticas ve-as na fonte, nao aqui.
+// A nota e a contagem sao as do Google em 2026-10-08: atualizar a mao de vez
+// em quando. Nao ha API gratis para as ler em tempo real.
+$ras_google = array(
+	array( 'Nogueiró', 'ChIJUYwWsrX9JA0RaWsRVBE0GzA', '5,0', '317' ),
+	array( 'Lamaçães', 'ChIJN59vt4D_JA0RBFbUwmY0HOk', '5,0', '166' ),
+);
 
 $ras_criticas = array(
 	array( 'João Oliveira',  'Sou cliente da Rides and Shaves e estou muito contente com o serviço. O nível de exigência e detalhe mantém-se sempre.' ),
@@ -32,8 +42,16 @@ $ras_criticas = array(
 <p class="has-gold-color has-text-color has-large-font-size">★★★★★</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:html -->
+<ul class="ras-google">
+<?php foreach ( $ras_google as list( $ras_loja, $ras_id, $ras_nota, $ras_n ) ) : ?>
+	<li><a href="<?php echo esc_url( "https://search.google.com/local/reviews?placeid=$ras_id" ); ?>" target="_blank" rel="noreferrer noopener"><strong><?php echo esc_html( $ras_loja ); ?></strong> <?php echo esc_html( "$ras_nota · $ras_n avaliações" ); ?></a></li>
+<?php endforeach; ?>
+</ul>
+<!-- /wp:html -->
+
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size">443 avaliações Google nas duas lojas</p>
+<p class="has-small-font-size">Avaliações verificadas no Google.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
@@ -62,8 +80,11 @@ $ras_criticas = array(
 <!-- /wp:columns -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-<div class="wp-block-buttons is-content-justification-center is-layout-flex"><!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=41.5514457,-8.3959997" target="_blank" rel="noreferrer noopener">Ver mais avaliações</a></div>
-<!-- /wp:button --></div>
+<div class="wp-block-buttons is-content-justification-center is-layout-flex">
+<?php foreach ( $ras_google as list( $ras_loja, $ras_id ) ) : ?>
+<!-- wp:button {"className":"is-style-outline is-icon-google"} -->
+<div class="wp-block-button is-style-outline is-icon-google"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( "https://search.google.com/local/reviews?placeid=$ras_id" ); ?>" target="_blank" rel="noreferrer noopener">Avaliações <?php echo esc_html( $ras_loja ); ?></a></div>
+<!-- /wp:button -->
+<?php endforeach; ?></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
