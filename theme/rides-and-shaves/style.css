@@ -4,7 +4,7 @@ Theme URI: https://ridesandshaves.pt
 Description: Child theme para a Rides and Shaves BarberShop, Braga. Tokens da marca em theme.json.
 Author: Rides and Shaves
 Template: twentytwentyfive
-Version: 3.9.0
+Version: 3.10.0
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -1249,6 +1249,34 @@ input[type="checkbox"] {
 	border: 1px solid var(--ras-line-soft) !important;
 	border-radius: 0 !important;
 	color: var(--wp--preset--color--cream) !important;
+}
+
+/* O pais: nas versoes recentes do Woo e um <select> nativo dentro de um
+   contentor que traz o fundo branco e a moldura; nas antigas era o combobox
+   de cima. Visto no site: so o combobox nao chegava. */
+.wc-block-components-select .wc-block-components-select__container,
+.wc-block-components-form select {
+	background-color: transparent !important;
+	border: 1px solid var(--ras-line-soft) !important;
+	border-radius: 0 !important;
+	color: var(--wp--preset--color--cream) !important;
+}
+
+.wc-block-components-select .wc-block-components-select__select {
+	background-color: transparent !important;
+	border: 0 !important;
+	color: var(--wp--preset--color--cream) !important;
+}
+
+.wc-block-components-select .wc-block-components-select__container:focus-within {
+	border-color: var(--wp--preset--color--gold) !important;
+}
+
+/* A lista aberta do select nativo: fundo escuro, senao e branco com cream. */
+.wc-block-components-select__select option,
+.wc-block-components-form select option {
+	background: var(--wp--preset--color--green-950);
+	color: var(--wp--preset--color--cream);
 }
 
 .wc-block-components-text-input input:focus,
